@@ -8,8 +8,8 @@ public class BoidsController {
     public List<Character> characters = new List<Character>();
 	// Use this for initialization
 	public void Start () {
-	    
-        neighborRadius = 7f;
+	    Time.fixedDeltaTime = 0.002f;
+        neighborRadius = 5f;
 	}
 	
     public void AddCharacter(Character i_character) {
@@ -20,6 +20,7 @@ public class BoidsController {
     public List<Character> FindCharactersInNeighborhood( Character i_character) {
         Vector2 center = (Vector2) i_character.GetComponent<Transform>().position;
         List<Character> characterInNeighborhood = new List<Character>();
+//        Character[] characters = FindObjectsOfType(typeof(Character)) as Character[];
         foreach (Character character in characters) {
             float distance = Vector2.Distance(center, (Vector2) character.GetComponent<Transform>().position);
             if (distance < neighborRadius) {
@@ -68,11 +69,13 @@ public class BoidsController {
                 continue;
             }
 
-            sumForce += GetSeparationForce( character) / 1f;
-            sumForce += GetCohensionForce( character);
-            character.velocity += sumForce/100f;
+            sumForce += GetSeparationForce( character) / 5f;
+            sumForce += GetCohensionForce( character) / 10f;
+            character.velocity += sumForce/1000f;
             //character.GetComponent<Transform>().position = (Vector2)character.GetComponent<Transform>().position + sumForce;
-            character.GetComponent<Transform>().position = (Vector2)character.GetComponent<Transform>().position + character.velocity;
+            character.GetComponent<Rigidbody2D>().MovePosition((Vector2)character.GetComponent<Transform>().position + character.velocity);
+            // character.GetComponent<Rigidbody2D>().AddForce(character.velocity);
+            // character.GetComponent<Rigidbody2D>().AddForce(sumForce);
         }
 	}
 }
