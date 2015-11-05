@@ -10,6 +10,8 @@ public class Player : MonoBehaviour {
 	public int score = 0;
 	private GameController gameController;
 
+    private static readonly float MAX_SPEED = 20;
+
 	void Start ()
 	{
 		myRigidbody = GetComponent<Rigidbody2D> ();
@@ -21,6 +23,10 @@ public class Player : MonoBehaviour {
 		//Debug.Log (Input.acceleration.x + "," + Input.acceleration.y);
 		myRigidbody.AddForce (new Vector2(Input.acceleration.x*gyroForce, Input.acceleration.y*gyroForce));
 		myRigidbody.AddForce (new Vector2(Input.GetAxis("Horizontal")*gyroForce,Input.GetAxis("Vertical")*gyroForce));
+
+        //Clamp player speed so bouncing doesn't get out of control
+        if(myRigidbody.velocity.SqrMagnitude() > MAX_SPEED*MAX_SPEED)
+            myRigidbody.velocity = myRigidbody.velocity.normalized*MAX_SPEED;
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
