@@ -10,9 +10,9 @@ GameObject:
   - 4: {fileID: 498040}
   - 212: {fileID: 21213770}
   - 61: {fileID: 6155776}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cactus
-  m_TagString: Untagged
+  m_TagString: StaticCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +36,7 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155802}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bbb7bf2080eb96e4db0a61e459fdc5e6, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: .000419219345, y: .0589001998}
@@ -79,6 +79,18 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: StaticCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: bbb7bf2080eb96e4db0a61e459fdc5e6, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155802}
