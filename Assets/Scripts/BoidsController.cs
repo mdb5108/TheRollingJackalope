@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BoidsController : MonoBehaviour {
+public class BoidsController {
 
     private float neighborRadius;
     private List<Character> characters = new List<Character>();
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 	
-        neighborRadius = 300f;
+        neighborRadius = 2f;
 	}
 	
     public void AddCharacter(ref Character i_character) {
@@ -41,24 +41,28 @@ public class BoidsController : MonoBehaviour {
     public Vector2 GetCohensionForce(ref Character i_character) {
         Vector2 attractiveForce = Vector2.zero;
         List<Character> characterInNeighborhood = FindCharactersInNeighborhood(ref i_character);
+        if (characterInNeighborhood.Count < 1) {
+            return Vector2.zero;
+        }
 
         Vector2 sum = Vector2.zero;
         foreach (Character character in characterInNeighborhood) {
             sum += (Vector2) character.GetComponent<Transform>().position; 
         }
         
-        attractiveForce = sum / characters.Count;
+        attractiveForce = (Vector2)i_character.GetComponent<Transform>().position - sum / characterInNeighborhood.Count;
         return attractiveForce;
     }
 	// Update is called once per frame
-	void Update () {
-        //foreach (Character character in characters) {
+	public void Update () {
         for (int i = 0; i < characters.Count; ++ i) {
             Vector2 sumForce = Vector2.zero;
             Character character = characters[i];
-            sumForce += GetSeparationForce(ref character);
+            sumForce += GetSeparationForce(ref character) / 100f;
             sumForce += GetCohensionForce(ref character);
-            character.GetComponent<Transform>().position = (Vector2)character.GetComponent<Transform>().position + sumForce;
+            character.velocity += sumForce/1000f;
+            //character.GetComponent<Transform>().position = (Vector2)character.GetComponent<Transform>().position + sumForce;
+            character.GetComponent<Transform>().position = (Vector2)character.GetComponent<Transform>().position + character.velocity;
         }
 	}
 }
