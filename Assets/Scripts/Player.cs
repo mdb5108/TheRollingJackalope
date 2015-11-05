@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : Character {
 
 	private Rigidbody2D myRigidbody;
 
@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
 
 	void Start ()
 	{
+        //base.Start();
 		myRigidbody = GetComponent<Rigidbody2D> ();
 		gameController = Camera.main.GetComponent<GameController> ();
 	}
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour {
             myRigidbody.velocity = myRigidbody.velocity.normalized*MAX_SPEED;
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
+	void OnCollisionEnter2D(Collision2D other)
 	{
 		if(other.gameObject.tag == "Friend")
 		{
