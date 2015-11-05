@@ -8,7 +8,6 @@ public class BoidsController {
     public List<Character> characters = new List<Character>();
 	// Use this for initialization
 	public void Start () {
-	    Time.fixedDeltaTime = 0.002f;
         neighborRadius = 5f;
 	}
 	
