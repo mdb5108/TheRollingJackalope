@@ -15,7 +15,7 @@ public class Game : MonoBehaviour {
 	    ArenaPosition = new Vector2(-20f, -20f);
         ArenaSize = new Vector2(40f, 40f);
 
-        numOfCharacter = 40;
+        numOfCharacter = 15;
         for (int i = 0; i < numOfCharacter; ++i) {
             Character character = ((GameObject)Instantiate(bearPrefab, Vector2.zero, Quaternion.identity)).GetComponent<Character>();
             //Character character = ((GameObject)Instantiate(characterPrefab, Vector2.zero, Quaternion.identity)).GetComponent<Character>();
