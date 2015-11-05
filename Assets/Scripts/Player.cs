@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : Character {
 
 	private Rigidbody2D myRigidbody;
 
@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
 
 	void Start ()
 	{
+        //base.Start();
 		myRigidbody = GetComponent<Rigidbody2D> ();
 		gameController = Camera.main.GetComponent<GameController> ();
 	}

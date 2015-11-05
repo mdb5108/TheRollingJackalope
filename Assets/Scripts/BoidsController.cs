@@ -5,22 +5,21 @@ using System.Collections.Generic;
 public class BoidsController {
 
     private float neighborRadius;
-    private List<Character> characters = new List<Character>();
+    public List<Character> characters = new List<Character>();
 	// Use this for initialization
 	public void Start () {
-	
-        neighborRadius = 2f;
+	    
+        neighborRadius = 7f;
 	}
 	
-    public void AddCharacter(ref Character i_character) {
+    public void AddCharacter(Character i_character) {
         characters.Add(i_character);
     }
 
     //
-    public List<Character> FindCharactersInNeighborhood(ref Character i_character) {
+    public List<Character> FindCharactersInNeighborhood( Character i_character) {
         Vector2 center = (Vector2) i_character.GetComponent<Transform>().position;
         List<Character> characterInNeighborhood = new List<Character>();
-//        Character[] characters = FindObjectsOfType(typeof(Character)) as Character[];
         foreach (Character character in characters) {
             float distance = Vector2.Distance(center, (Vector2) character.GetComponent<Transform>().position);
             if (distance < neighborRadius) {
@@ -30,17 +29,17 @@ public class BoidsController {
 
         return characterInNeighborhood;
     }
-    public Vector2 GetSeparationForce(ref Character i_character) {
+    public Vector2 GetSeparationForce( Character i_character) {
         Vector2 repulsiveForce = Vector2.zero;
-        List<Character> characterInNeighborhood = FindCharactersInNeighborhood(ref i_character);
+        List<Character> characterInNeighborhood = FindCharactersInNeighborhood( i_character);
         foreach (Character character in characterInNeighborhood) {
             repulsiveForce += (Vector2) i_character.GetComponent<Transform>().position - (Vector2)character.GetComponent<Transform>().position;
         }
         return repulsiveForce;
     }
-    public Vector2 GetCohensionForce(ref Character i_character) {
+    public Vector2 GetCohensionForce( Character i_character) {
         Vector2 attractiveForce = Vector2.zero;
-        List<Character> characterInNeighborhood = FindCharactersInNeighborhood(ref i_character);
+        List<Character> characterInNeighborhood = FindCharactersInNeighborhood( i_character);
         if (characterInNeighborhood.Count < 1) {
             return Vector2.zero;
         }
@@ -54,13 +53,24 @@ public class BoidsController {
         return attractiveForce;
     }
 	// Update is called once per frame
-	public void Update () {
+	public void FixedUpdate () {
+        // Remove destroyed objects.
+        for (int i = 0; i < characters.Count; ++ i) {
+            if (characters[i] == null) {
+                characters.Remove(characters[i]);
+            }
+        }
         for (int i = 0; i < characters.Count; ++ i) {
             Vector2 sumForce = Vector2.zero;
             Character character = characters[i];
-            sumForce += GetSeparationForce(ref character) / 100f;
-            sumForce += GetCohensionForce(ref character);
-            character.velocity += sumForce/1000f;
+            
+            if (character.name == "Player") {
+                continue;
+            }
+
+            sumForce += GetSeparationForce( character) / 1f;
+            sumForce += GetCohensionForce( character);
+            character.velocity += sumForce/100f;
             //character.GetComponent<Transform>().position = (Vector2)character.GetComponent<Transform>().position + sumForce;
             character.GetComponent<Transform>().position = (Vector2)character.GetComponent<Transform>().position + character.velocity;
         }
