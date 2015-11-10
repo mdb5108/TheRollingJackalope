@@ -1462,15 +1462,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 480270, guid: a531455b8fc78ad4db05447761e2b191, type: 2}
       propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11433980, guid: a531455b8fc78ad4db05447761e2b191, type: 2}
-      propertyPath: gyroForce
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 21290556, guid: a531455b8fc78ad4db05447761e2b191, type: 2}
-      propertyPath: m_SortingLayerID
-      value: 548317735
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a531455b8fc78ad4db05447761e2b191, type: 2}
