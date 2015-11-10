@@ -48,10 +48,12 @@ public class Player : Character {
                 river.GetComponent<Collider2D>().enabled = false;
             }
         }
-        if (gameController.GetScore() >= 0) {
+        if (gameController.GetScore() >= 1) {
+            /*
             GameObject camera = GameObject.Find("Main Camera");
             GameObject playgound1 = GameObject.Find("Playground 1");
             camera.GetComponent<CameraController>().borders = playgound1.GetComponent<Transform>().FindChild("Borders");      
+            */
         }
 	}
 

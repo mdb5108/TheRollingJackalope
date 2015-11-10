@@ -36,5 +36,6 @@ public class GameController : MonoBehaviour {
     }
     public void SetScore(int i_score) {
         score = i_score;
+        UpdateScore();
     }
 }
