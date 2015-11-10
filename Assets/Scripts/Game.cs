@@ -11,6 +11,8 @@ public class Game : MonoBehaviour {
     private BoidsController boidsController;
 	// Use this for initialization
 	void Start () {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
         boidsController = new BoidsController();
 	    ArenaPosition = new Vector2(-20f, -20f);
         ArenaSize = new Vector2(40f, 40f);

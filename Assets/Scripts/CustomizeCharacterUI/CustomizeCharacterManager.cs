@@ -37,4 +37,9 @@ public class CustomizeCharacterManager : MonoBehaviour
     {
         return curSection;
     }
+
+    public void LoadGame()
+    {
+        Application.LoadLevel("Playground1");
+    }
 }

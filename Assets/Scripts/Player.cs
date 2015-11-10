@@ -40,6 +40,11 @@ public class Player : Character {
         //base.Start();
 		myRigidbody = GetComponent<Rigidbody2D> ();
 		gameController = Camera.main.GetComponent<GameController> ();
+
+        var data = SavedGameManager.Instance.GetData();
+        SetHeadAccessory(data.headAccessory);
+        SetBodyAccessory(data.bodyAccessory);
+        SetFootAccessory(data.footAccessory);
 	}
 
 	void FixedUpdate ()
@@ -72,6 +77,11 @@ public class Player : Character {
         HeadAccessory = AccessoryManager.Instance.GetHeadAccessory(name);
         HeadAccessory = (GameObject)Instantiate(HeadAccessory, HeadAccessory.transform.position, HeadAccessory.transform.rotation);
         HeadAccessory.transform.SetParent(HeadAnchor.transform);
+
+        if(HeadAccessory == null)
+            SavedGameManager.Instance.GetData().headAccessory = "None";
+        else
+            SavedGameManager.Instance.GetData().headAccessory = name;
     }
     public void SetBodyAccessory(string name)
     {
@@ -80,6 +90,11 @@ public class Player : Character {
         BodyAccessory = AccessoryManager.Instance.GetBodyAccessory(name);
         BodyAccessory = (GameObject)Instantiate(BodyAccessory, BodyAccessory.transform.position, BodyAccessory.transform.rotation);
         BodyAccessory.transform.SetParent(BodyAnchor.transform);
+
+        if(BodyAccessory == null)
+            SavedGameManager.Instance.GetData().bodyAccessory = "None";
+        else
+            SavedGameManager.Instance.GetData().bodyAccessory = name;
     }
     public void SetFootAccessory(string name)
     {
@@ -88,5 +103,10 @@ public class Player : Character {
         FootAccessory = AccessoryManager.Instance.GetFootAccessory(name);
         FootAccessory = (GameObject)Instantiate(FootAccessory, FootAccessory.transform.position, FootAccessory.transform.rotation);
         FootAccessory.transform.SetParent(FootAnchor.transform);
+
+        if(FootAccessory == null)
+            SavedGameManager.Instance.GetData().footAccessory = "None";
+        else
+            SavedGameManager.Instance.GetData().footAccessory = name;
     }
 }
