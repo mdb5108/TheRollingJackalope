@@ -99,7 +99,12 @@ namespace UnityEngine.UI.Extensions
             if(_oldScreen != CurrentScreen())
             {
                 if(OnSelectionChanged != null)
-                    OnSelectionChanged(CurrentScreen());
+                {
+                    if(CurrentScreen() >= 0)
+                        OnSelectionChanged(CurrentScreen());
+                    else
+                        OnSelectionChanged(0);
+                }
                 _oldScreen = CurrentScreen();
             }
 
