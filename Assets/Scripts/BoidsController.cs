@@ -8,7 +8,7 @@ public class BoidsController {
     public List<Character> characters = new List<Character>();
 	// Use this for initialization
 	public void Start () {
-	    Time.fixedDeltaTime = 0.002f;
+	    Time.fixedDeltaTime = 0.02f;
         neighborRadius = 5f;
 	}
 	
@@ -34,7 +34,10 @@ public class BoidsController {
         Vector2 repulsiveForce = Vector2.zero;
         List<Character> characterInNeighborhood = FindCharactersInNeighborhood( i_character);
         foreach (Character character in characterInNeighborhood) {
-            repulsiveForce += (Vector2) i_character.GetComponent<Transform>().position - (Vector2)character.GetComponent<Transform>().position;
+            Vector2 force = (Vector2) i_character.GetComponent<Transform>().position - (Vector2)character.GetComponent<Transform>().position;
+            if (force.magnitude != 0f) {
+                repulsiveForce += force.normalized * Mathf.Pow((1f/force.magnitude), 3f);// * (1f/force.magnitude) * (1f/force.magnitude);
+            }
         }
         return repulsiveForce;
     }
@@ -69,13 +72,10 @@ public class BoidsController {
                 continue;
             }
 
-            sumForce += GetSeparationForce( character) / 5f;
-            sumForce += GetCohensionForce( character) / 10f;
-            character.velocity += sumForce/1000f;
-            //character.GetComponent<Transform>().position = (Vector2)character.GetComponent<Transform>().position + sumForce;
+            sumForce += GetSeparationForce( character) / 10f;
+            sumForce += GetCohensionForce( character) / 100f;
+            character.velocity += sumForce/1f;
             character.GetComponent<Rigidbody2D>().MovePosition((Vector2)character.GetComponent<Transform>().position + character.velocity);
-            // character.GetComponent<Rigidbody2D>().AddForce(character.velocity);
-            // character.GetComponent<Rigidbody2D>().AddForce(sumForce);
         }
 	}
 }

@@ -30,4 +30,11 @@ public class GameController : MonoBehaviour {
 		score += newScore;
 		UpdateScore();
 	}
+
+    public int GetScore() {
+        return score;
+    }
+    public void SetScore(int i_score) {
+        score = i_score;
+    }
 }
