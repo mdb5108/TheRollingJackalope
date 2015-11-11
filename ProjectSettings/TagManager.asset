@@ -8,6 +8,7 @@ TagManager:
   - Border
   - Friend
   - River1
+  - River2
   layers:
   - Default
   - TransparentFX

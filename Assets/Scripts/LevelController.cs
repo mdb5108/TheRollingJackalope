@@ -9,6 +9,8 @@ public class LevelController : MonoBehaviour {
     private GameController gameController;
     private int fullScore;
     private int currentLevel;
+    // Magic Numbers.
+    private float[] milestones = {0f, -25f, -90f, -200f};
     
 
 	// Use this for initialization
@@ -26,7 +28,7 @@ public class LevelController : MonoBehaviour {
 	}
 
     void FixedUpdate() {
-        if (gameController.GetScore() >= fullScore) {
+        if (gameController.GetScore() >= fullScore && cameraController.GetIsCrossing() == false) {
             GameObject[] rivers = GameObject.FindGameObjectsWithTag("River" + currentLevel);
             foreach (GameObject river in rivers) {
                 river.GetComponent<BoxCollider2D>().enabled = false;
@@ -34,7 +36,7 @@ public class LevelController : MonoBehaviour {
             }
             cameraController.SetIsCrossing(true);
         }
-        if (player.GetComponent<Transform>().position.y < -30f) {
+        if (player.GetComponent<Transform>().position.y < milestones[currentLevel] && cameraController.GetIsCrossing() == true) {
             gameController.SetScore(0);
             GameObject[] rivers = GameObject.FindGameObjectsWithTag("River" + currentLevel);
             foreach (GameObject river in rivers) {
@@ -42,10 +44,12 @@ public class LevelController : MonoBehaviour {
                 river.GetComponent<Collider2D>().enabled = true;
             }
 
-            GameObject playgound1 = GameObject.Find("Playground 1");
+            GameObject playgound1 = GameObject.Find("Playground"+(currentLevel + 1));
             cameraObject.GetComponent<CameraController>().borders = playgound1.GetComponent<Transform>().FindChild("Borders");      
             cameraController.SetIsCrossing(false);
             cameraController.SetOffset((Vector2)playgound1.GetComponent<Transform>().position);
+            cameraController.StartZoom();
+            currentLevel ++;
         }
     }
 }
