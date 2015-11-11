@@ -7,7 +7,7 @@ TagManager:
   - StaticCollider
   - Border
   - Friend
-  - River
+  - River1
   layers:
   - Default
   - TransparentFX

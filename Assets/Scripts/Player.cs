@@ -28,8 +28,8 @@ public class Player : Character {
         //Clamp player speed so bouncing doesn't get out of control
         if(myRigidbody.velocity.SqrMagnitude() > MAX_SPEED*MAX_SPEED)
             myRigidbody.velocity = myRigidbody.velocity.normalized*MAX_SPEED;
-
-        if (this.transform.position.y > 23) {
+/*
+        if (this.transform.position.y < -30.0f) {
             gameController.SetScore(0);
             GameObject[] rivers = GameObject.FindGameObjectsWithTag("River");
             foreach (GameObject river in rivers) {
@@ -38,9 +38,15 @@ public class Player : Character {
             }
 
             GameObject camera = GameObject.Find("Main Camera");
+            GameObject playgound1 = GameObject.Find("Playground 1");
+            camera.GetComponent<CameraController>().borders = playgound1.GetComponent<Transform>().FindChild("Borders");      
+
+            //GameObject camera = GameObject.Find("Main Camera");
             Vector3 scale = camera.GetComponent<Transform>().localScale;
             camera.GetComponent<Transform>().localScale = new Vector3(1.5f, 1.5f, 1);
         }
+        */
+        /*
         if (gameController.GetScore() >= 1) {
             GameObject[] rivers = GameObject.FindGameObjectsWithTag("River");
             foreach (GameObject river in rivers) {
@@ -49,12 +55,11 @@ public class Player : Character {
             }
         }
         if (gameController.GetScore() >= 1) {
-            /*
             GameObject camera = GameObject.Find("Main Camera");
             GameObject playgound1 = GameObject.Find("Playground 1");
             camera.GetComponent<CameraController>().borders = playgound1.GetComponent<Transform>().FindChild("Borders");      
-            */
         }
+        */
 	}
 
 	void OnCollisionEnter2D(Collision2D other)
