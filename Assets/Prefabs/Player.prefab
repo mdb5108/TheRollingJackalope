@@ -509,6 +509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0}
   gyroForce: 100
+  pcInputSpeed: 50
   scoreText: {fileID: 0}
   score: 0
   respondToInput: 1
@@ -699,6 +700,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: b0382b861377f9a4d82d12940785a26e,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: pcInputSpeed
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 128648}

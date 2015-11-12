@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Game : MonoBehaviour {
+    /*
     private GameObject characterPrefab;
     public GameObject foxPrefab;
     public GameObject ostrichPrefab;
@@ -53,4 +54,5 @@ public class Game : MonoBehaviour {
     {
         Application.LoadLevel("CharCustomize");
     }
+    */
 }

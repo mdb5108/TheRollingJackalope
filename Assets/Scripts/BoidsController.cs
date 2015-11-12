@@ -15,6 +15,9 @@ public class BoidsController {
     public void AddCharacter(Character i_character) {
         characters.Add(i_character);
     }
+    public void AddCharacters(List<Character> i_characters) {
+        characters.AddRange(i_characters);
+    }
 
     public List<Character> FindCharactersInNeighborhood( Character i_character) {
         Vector2 center = (Vector2) i_character.GetComponent<Transform>().position;
@@ -74,6 +77,7 @@ public class BoidsController {
             sumForce += GetSeparationForce( character) / 10f;
             sumForce += GetCohensionForce( character) / 100f;
             character.velocity += sumForce/5f;
+
             character.GetComponent<Rigidbody2D>().MovePosition((Vector2)character.GetComponent<Transform>().position + character.velocity);
         }
 	}
