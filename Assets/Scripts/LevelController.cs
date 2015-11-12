@@ -15,7 +15,7 @@ public class LevelController : MonoBehaviour {
     // No Magic Numbers.
 	private float[] milestones = new float[4];
     // Magic Numbers.
-    private float[] milestones = {0f, -25f, -90f, -200f};
+    //private float[] milestones = {0f, -25f, -90f, -200f};
     private NpcSpawner npcSpawner;
     private BoidsController boidsController;
 
@@ -88,7 +88,7 @@ public class LevelController : MonoBehaviour {
             GameObject playgound = GameObject.Find("Playground"+(currentLevel + 1));
             cameraObject.GetComponent<CameraController>().borders = playgound.GetComponent<Transform>().FindChild("Borders");
             cameraController.SetIsCrossing(false);
-            cameraController.SetOffset((Vector2)playgound.GetComponent<Transform>().position);
+            //cameraController.SetOffset((Vector2)playgound.GetComponent<Transform>().position);
             cameraController.StartZoom();
             currentLevel ++;
         }
