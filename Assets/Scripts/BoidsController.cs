@@ -36,7 +36,8 @@ public class BoidsController {
         foreach (Character character in characterInNeighborhood) {
             Vector2 force = (Vector2) i_character.GetComponent<Transform>().position - (Vector2)character.GetComponent<Transform>().position;
             if (force.magnitude != 0f) {
-                repulsiveForce += force.normalized * Mathf.Pow((1f/force.magnitude), 3f);// * (1f/force.magnitude) * (1f/force.magnitude);
+                //repulsiveForce += force.normalized * Mathf.Pow((1f/force.magnitude), 3f);
+                repulsiveForce += Mathf.Sqrt(neighborRadius * neighborRadius - force.magnitude * force.magnitude) * force.normalized;
             }
         }
         return repulsiveForce;
@@ -74,7 +75,7 @@ public class BoidsController {
 
             sumForce += GetSeparationForce( character) / 10f;
             sumForce += GetCohensionForce( character) / 100f;
-            character.velocity += sumForce/1f;
+            character.velocity += sumForce/5f;
             character.GetComponent<Rigidbody2D>().MovePosition((Vector2)character.GetComponent<Transform>().position + character.velocity);
         }
 	}
