@@ -66,6 +66,7 @@ public class Player : Character {
 		if(other.gameObject.tag == "Friend")
 		{
 			gameController.AddScore(1);
+            SavedGameManager.Instance.GetData().currency += 20;
 			Destroy(other.gameObject);
 		}
 	}
@@ -74,7 +75,7 @@ public class Player : Character {
     {
         if(HeadAccessory != null)
             Destroy(HeadAccessory);
-        HeadAccessory = AccessoryManager.Instance.GetHeadAccessory(name);
+        HeadAccessory = AccessoryManager.Instance.GetHeadAccessory(name).obj;
         HeadAccessory = (GameObject)Instantiate(HeadAccessory, HeadAccessory.transform.position, HeadAccessory.transform.rotation);
         HeadAccessory.transform.SetParent(HeadAnchor.transform);
 
@@ -87,7 +88,7 @@ public class Player : Character {
     {
         if(BodyAccessory != null)
             Destroy(BodyAccessory);
-        BodyAccessory = AccessoryManager.Instance.GetBodyAccessory(name);
+        BodyAccessory = AccessoryManager.Instance.GetBodyAccessory(name).obj;
         BodyAccessory = (GameObject)Instantiate(BodyAccessory, BodyAccessory.transform.position, BodyAccessory.transform.rotation);
         BodyAccessory.transform.SetParent(BodyAnchor.transform);
 
@@ -100,7 +101,7 @@ public class Player : Character {
     {
         if(FootAccessory != null)
             Destroy(FootAccessory);
-        FootAccessory = AccessoryManager.Instance.GetFootAccessory(name);
+        FootAccessory = AccessoryManager.Instance.GetFootAccessory(name).obj;
         FootAccessory = (GameObject)Instantiate(FootAccessory, FootAccessory.transform.position, FootAccessory.transform.rotation);
         FootAccessory.transform.SetParent(FootAnchor.transform);
 

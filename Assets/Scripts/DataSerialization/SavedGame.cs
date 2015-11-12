@@ -13,6 +13,8 @@ public class SavedGameData
     public Dictionary<string, bool> bodyUnlocked;
     public Dictionary<string, bool> footUnlocked;
 
+    public uint currency;
+
     public SavedGameData()
     {
         headAccessory = "None";
@@ -24,6 +26,8 @@ public class SavedGameData
         headUnlocked.Add("None", true);
         bodyUnlocked.Add("None", true);
         footUnlocked.Add("None", true);
+
+        currency = 0;
     }
 }
 

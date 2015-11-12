@@ -12,7 +12,7 @@ public class AccessoryScroller : MonoBehaviour
     [SerializeField]
     private GameObject UIContainer;
 
-    KeyValuePair<string, GameObject>[] items;
+    KeyValuePair<string, AccessoryManager.AccessoryItem>[] items;
     LockableItem[] instantiated;
 
     [SerializeField]
@@ -32,7 +32,7 @@ public class AccessoryScroller : MonoBehaviour
     void Start ()
     {
         scroller.OnSelectionChanged = OnSelectionChanged;
-        KeyValuePair<string, GameObject>[] accessories;
+        KeyValuePair<string, AccessoryManager.AccessoryItem>[] accessories;
         string accessoryName;
 
         switch(ourSection)
@@ -99,7 +99,7 @@ public class AccessoryScroller : MonoBehaviour
         selected = item;
     }
 
-    private void SetItems(KeyValuePair<string, GameObject>[] items)
+    private void SetItems(KeyValuePair<string, AccessoryManager.AccessoryItem>[] items)
     {
         this.items = items;
         if(this.instantiated != null)
@@ -112,27 +112,12 @@ public class AccessoryScroller : MonoBehaviour
         }
         this.instantiated = new LockableItem[items.Length];
 
-        Dictionary<string, bool> unlocked;
-        switch(ourSection)
-        {
-            case BODY_SECTION.HEAD:
-                unlocked = SavedGameManager.Instance.GetData().headUnlocked;
-                break;
-            case BODY_SECTION.BODY:
-                unlocked = SavedGameManager.Instance.GetData().bodyUnlocked;
-                break;
-            default:
-            case BODY_SECTION.FOOT:
-                unlocked = SavedGameManager.Instance.GetData().footUnlocked;
-                break;
-        }
-
         for(int i = 0; i < items.Length; i++)
         {
             GameObject go = (GameObject)Instantiate(UIContainer, Vector2.zero, Quaternion.identity);
             go.transform.SetParent(contentPane.transform, true);
             LockableItem li = go.GetComponent<LockableItem>();
-            li.SetImage(items[i].Value.GetComponentsInChildren<SpriteRenderer>(true)[0].sprite);
+            li.SetImage(items[i].Value.obj.GetComponentsInChildren<SpriteRenderer>(true)[0].sprite);
             this.instantiated[i] = li;
             SetItemState(i);
         }
@@ -167,6 +152,7 @@ public class AccessoryScroller : MonoBehaviour
         }
         unlocked[items[selected].Key] = true;
         instantiated[selected].SetState(LockableItem.SHOW_STATE.UNLOCKED_ON);
+        SavedGameManager.Instance.GetData().currency -= this.items[selected].Value.price;
     }
 
     private bool IsUnlocked(int item)
@@ -194,8 +180,12 @@ public class AccessoryScroller : MonoBehaviour
     {
         if(!IsUnlocked(selected))
         {
+            var currency = SavedGameManager.Instance.GetData().currency;
+            var price = this.items[selected].Value.price;
             CustomizeCharacterManager.Instance.TurnInteractible(false);
-            buyPanel.PopUp(this.items[selected].Value.GetComponentsInChildren<SpriteRenderer>(true)[0].sprite, BuySelected);
+            buyPanel.PopUp(this.items[selected].Value.obj.GetComponentsInChildren<SpriteRenderer>(true)[0].sprite,
+                           price <= currency,
+                           BuySelected);
         }
     }
 }

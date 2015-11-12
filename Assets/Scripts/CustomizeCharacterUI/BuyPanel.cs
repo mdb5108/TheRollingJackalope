@@ -8,16 +8,18 @@ public class BuyPanel : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
     [SerializeField] private Image itemImage;
+    [SerializeField] private Button actionButton;
 
     Action confirmed;
 
-    public void PopUp(Sprite item, Action confirm)
+    public void PopUp(Sprite item, bool actionEnabled, Action confirm)
     {
         itemImage.sprite = item;
 
         confirmed = confirm;
 
         panel.SetActive(true);
+        actionButton.interactable = actionEnabled;
     }
 
     public void PopDown()

@@ -10,7 +10,14 @@ public class AccessoryManager : MonoBehaviour
     public struct NameAndObject
     {
         public string name;
+        public AccessoryItem obj;
+    }
+
+    [System.Serializable]
+    public struct AccessoryItem
+    {
         public GameObject obj;
+        public uint price;
     }
 
     [SerializeField]
@@ -20,9 +27,9 @@ public class AccessoryManager : MonoBehaviour
     [SerializeField]
     private NameAndObject[] FootAccessories;
 
-    private Dictionary<string, GameObject> DictHeadAccessories;
-    private Dictionary<string, GameObject> DictBodyAccessories;
-    private Dictionary<string, GameObject> DictFootAccessories;
+    private Dictionary<string, AccessoryItem> DictHeadAccessories;
+    private Dictionary<string, AccessoryItem> DictBodyAccessories;
+    private Dictionary<string, AccessoryItem> DictFootAccessories;
 
     private static AccessoryManager _instance;
     public static AccessoryManager Instance
@@ -40,45 +47,45 @@ public class AccessoryManager : MonoBehaviour
 
     public void Awake()
     {
-        DictHeadAccessories = new Dictionary<string, GameObject>();
+        DictHeadAccessories = new Dictionary<string, AccessoryItem>();
         foreach(var no in HeadAccessories)
         {
             DictHeadAccessories.Add(no.name, no.obj);
         }
-        DictBodyAccessories = new Dictionary<string, GameObject>();
+        DictBodyAccessories = new Dictionary<string, AccessoryItem>();
         foreach(var no in BodyAccessories)
         {
             DictBodyAccessories.Add(no.name, no.obj);
         }
-        DictFootAccessories = new Dictionary<string, GameObject>();
+        DictFootAccessories = new Dictionary<string, AccessoryItem>();
         foreach(var no in FootAccessories)
         {
             DictFootAccessories.Add(no.name, no.obj);
         }
     }
 
-    public KeyValuePair<string, GameObject>[] GetHeadAccessories()
+    public KeyValuePair<string, AccessoryItem>[] GetHeadAccessories()
     {
         return DictHeadAccessories.ToArray();
     }
-    public KeyValuePair<string, GameObject>[] GetBodyAccessories()
+    public KeyValuePair<string, AccessoryItem>[] GetBodyAccessories()
     {
         return DictBodyAccessories.ToArray();
     }
-    public KeyValuePair<string, GameObject>[] GetFootAccessories()
+    public KeyValuePair<string, AccessoryItem>[] GetFootAccessories()
     {
         return DictFootAccessories.ToArray();
     }
 
-    public GameObject GetHeadAccessory(string name)
+    public AccessoryItem GetHeadAccessory(string name)
     {
         return DictHeadAccessories[name];
     }
-    public GameObject GetBodyAccessory(string name)
+    public AccessoryItem GetBodyAccessory(string name)
     {
         return DictBodyAccessories[name];
     }
-    public GameObject GetFootAccessory(string name)
+    public AccessoryItem GetFootAccessory(string name)
     {
         return DictFootAccessories[name];
     }
