@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class SavedGameData
@@ -8,11 +9,21 @@ public class SavedGameData
     public string bodyAccessory;
     public string footAccessory;
 
+    public Dictionary<string, bool> headUnlocked;
+    public Dictionary<string, bool> bodyUnlocked;
+    public Dictionary<string, bool> footUnlocked;
+
     public SavedGameData()
     {
         headAccessory = "None";
         bodyAccessory = "None";
         footAccessory = "None";
+        headUnlocked = new Dictionary<string, bool>();
+        bodyUnlocked = new Dictionary<string, bool>();
+        footUnlocked = new Dictionary<string, bool>();
+        headUnlocked.Add("None", true);
+        bodyUnlocked.Add("None", true);
+        footUnlocked.Add("None", true);
     }
 }
 

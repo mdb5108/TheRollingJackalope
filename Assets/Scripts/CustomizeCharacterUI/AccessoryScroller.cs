@@ -13,7 +13,10 @@ public class AccessoryScroller : MonoBehaviour
     private GameObject UIContainer;
 
     KeyValuePair<string, GameObject>[] items;
-    GameObject[] instantiated;
+    LockableItem[] instantiated;
+
+    [SerializeField]
+    private BuyPanel buyPanel;
 
     [SerializeField]
     private HorizontalScrollSnap scroller;
@@ -22,6 +25,8 @@ public class AccessoryScroller : MonoBehaviour
 
     [SerializeField]
     private BODY_SECTION ourSection;
+
+    private int selected = 0;
 
     // Use this for initialization
     void Start ()
@@ -75,21 +80,23 @@ public class AccessoryScroller : MonoBehaviour
         switch(ourSection)
         {
             case BODY_SECTION.HEAD:
-                Player.Instance.SetHeadAccessory(items[item].Key);
+                if(IsUnlocked(item))
+                    Player.Instance.SetHeadAccessory(items[item].Key);
                 break;
             case BODY_SECTION.BODY:
-                Player.Instance.SetBodyAccessory(items[item].Key);
+                if(IsUnlocked(item))
+                    Player.Instance.SetBodyAccessory(items[item].Key);
                 break;
             default:
             case BODY_SECTION.FOOT:
-                Player.Instance.SetFootAccessory(items[item].Key);
+                if(IsUnlocked(item))
+                    Player.Instance.SetFootAccessory(items[item].Key);
                 break;
         }
-        foreach(var go in instantiated)
-        {
-            go.SetActive(true);
-        }
-        instantiated[item].SetActive(false);
+
+        SetItemState(selected);
+        SetItemState(item, true);
+        selected = item;
     }
 
     private void SetItems(KeyValuePair<string, GameObject>[] items)
@@ -97,20 +104,98 @@ public class AccessoryScroller : MonoBehaviour
         this.items = items;
         if(this.instantiated != null)
         {
-            foreach(var go in this.instantiated)
+            foreach(var li in this.instantiated)
             {
-                go.transform.SetParent(null);
-                Destroy(go);
+                li.gameObject.transform.SetParent(null);
+                Destroy(li.gameObject);
             }
         }
-        this.instantiated = new GameObject[items.Length];
+        this.instantiated = new LockableItem[items.Length];
+
+        Dictionary<string, bool> unlocked;
+        switch(ourSection)
+        {
+            case BODY_SECTION.HEAD:
+                unlocked = SavedGameManager.Instance.GetData().headUnlocked;
+                break;
+            case BODY_SECTION.BODY:
+                unlocked = SavedGameManager.Instance.GetData().bodyUnlocked;
+                break;
+            default:
+            case BODY_SECTION.FOOT:
+                unlocked = SavedGameManager.Instance.GetData().footUnlocked;
+                break;
+        }
 
         for(int i = 0; i < items.Length; i++)
         {
             GameObject go = (GameObject)Instantiate(UIContainer, Vector2.zero, Quaternion.identity);
             go.transform.SetParent(contentPane.transform, true);
-            go.GetComponent<Image>().sprite = items[i].Value.GetComponentsInChildren<SpriteRenderer>(true)[0].sprite;
-            this.instantiated[i] = go;
+            LockableItem li = go.GetComponent<LockableItem>();
+            li.SetImage(items[i].Value.GetComponentsInChildren<SpriteRenderer>(true)[0].sprite);
+            this.instantiated[i] = li;
+            SetItemState(i);
+        }
+    }
+
+    private void SetItemState(int item, bool selected = false)
+    {
+        if(!selected)
+            instantiated[item].SetState(IsUnlocked(item) ? LockableItem.SHOW_STATE.UNLOCKED : LockableItem.SHOW_STATE.LOCKED);
+        else
+            instantiated[item].SetState(IsUnlocked(item) ? LockableItem.SHOW_STATE.UNLOCKED_ON : LockableItem.SHOW_STATE.LOCKED_ON);
+    }
+
+    public void BuySelected()
+    {
+        Dictionary<string, bool> unlocked;
+        switch(ourSection)
+        {
+            case BODY_SECTION.HEAD:
+                unlocked = SavedGameManager.Instance.GetData().headUnlocked;
+                Player.Instance.SetHeadAccessory(items[selected].Key);
+                break;
+            case BODY_SECTION.BODY:
+                unlocked = SavedGameManager.Instance.GetData().bodyUnlocked;
+                Player.Instance.SetBodyAccessory(items[selected].Key);
+                break;
+            default:
+            case BODY_SECTION.FOOT:
+                unlocked = SavedGameManager.Instance.GetData().footUnlocked;
+                Player.Instance.SetFootAccessory(items[selected].Key);
+                break;
+        }
+        unlocked[items[selected].Key] = true;
+        instantiated[selected].SetState(LockableItem.SHOW_STATE.UNLOCKED_ON);
+    }
+
+    private bool IsUnlocked(int item)
+    {
+        Dictionary<string, bool> unlocked;
+        switch(ourSection)
+        {
+            case BODY_SECTION.HEAD:
+                unlocked = SavedGameManager.Instance.GetData().headUnlocked;
+                break;
+            case BODY_SECTION.BODY:
+                unlocked = SavedGameManager.Instance.GetData().bodyUnlocked;
+                break;
+            default:
+            case BODY_SECTION.FOOT:
+                unlocked = SavedGameManager.Instance.GetData().footUnlocked;
+                break;
+        }
+        bool ret = false;
+        unlocked.TryGetValue(this.items[item].Key, out ret);
+        return ret;
+    }
+
+    public void OpenSelected()
+    {
+        if(!IsUnlocked(selected))
+        {
+            CustomizeCharacterManager.Instance.TurnInteractible(false);
+            buyPanel.PopUp(this.items[selected].Value.GetComponentsInChildren<SpriteRenderer>(true)[0].sprite, BuySelected);
         }
     }
 }
