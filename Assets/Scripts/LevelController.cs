@@ -32,6 +32,8 @@ public class LevelController : MonoBehaviour {
         currentLevel = 1;
         hasSpawned = false;
 
+        gameController.SetThreshold(fullScore);
+
 		// Get the milestones.
 		for (int i = 1; i <= 3; ++ i) {
 			GameObject[] bridges = GameObject.FindGameObjectsWithTag("Bridge" + i);
