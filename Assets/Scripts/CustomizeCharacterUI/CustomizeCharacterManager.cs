@@ -74,6 +74,6 @@ public class CustomizeCharacterManager : MonoBehaviour
 
     public void LoadGame()
     {
-        Application.LoadLevel("Playground1");
+        Application.LoadLevel("Menu");
     }
 }
