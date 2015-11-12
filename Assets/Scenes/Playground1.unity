@@ -594,6 +594,10 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 066e090de0dde6044805d46e4fe7942b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &274809204 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 192634, guid: a531455b8fc78ad4db05447761e2b191, type: 2}
+  m_PrefabInternal: {fileID: 1340676843}
 --- !u!1 &277097140
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,6 +762,14 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 11449302, guid: 860ab6caecc83bf4da585f2d754045aa, type: 2}
+      propertyPath: foxPrefab
+      value: 
+      objectReference: {fileID: 136412, guid: 14c1fc9068bfbff4aa3ac4163c7881a9, type: 2}
+    - target: {fileID: 11449302, guid: 860ab6caecc83bf4da585f2d754045aa, type: 2}
+      propertyPath: birdPrefab
+      value: 
+      objectReference: {fileID: 172566, guid: b6361f05f23fe79448d325538fac0e18, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 860ab6caecc83bf4da585f2d754045aa, type: 2}
   m_IsPrefabParent: 0
@@ -1457,6 +1469,10 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 066e090de0dde6044805d46e4fe7942b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &731767407 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 147502, guid: a531455b8fc78ad4db05447761e2b191, type: 2}
+  m_PrefabInternal: {fileID: 1340676843}
 --- !u!1001 &734088315
 Prefab:
   m_ObjectHideFlags: 0
@@ -2815,6 +2831,18 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 1.05999994
       objectReference: {fileID: 0}
+    - target: {fileID: 11485882, guid: a531455b8fc78ad4db05447761e2b191, type: 2}
+      propertyPath: HeadAnchor
+      value: 
+      objectReference: {fileID: 731767407}
+    - target: {fileID: 11485882, guid: a531455b8fc78ad4db05447761e2b191, type: 2}
+      propertyPath: FootAnchor
+      value: 
+      objectReference: {fileID: 274809204}
+    - target: {fileID: 11485882, guid: a531455b8fc78ad4db05447761e2b191, type: 2}
+      propertyPath: BodyAnchor
+      value: 
+      objectReference: {fileID: 1620046549}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a531455b8fc78ad4db05447761e2b191, type: 2}
   m_IsPrefabParent: 0
@@ -3877,6 +3905,10 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 066e090de0dde6044805d46e4fe7942b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1620046549 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 112138, guid: a531455b8fc78ad4db05447761e2b191, type: 2}
+  m_PrefabInternal: {fileID: 1340676843}
 --- !u!1 &1640344803
 GameObject:
   m_ObjectHideFlags: 0
@@ -4272,8 +4304,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d540db963fe1e442858a432846aab15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foxPrefab: {fileID: 136412, guid: 14c1fc9068bfbff4aa3ac4163c7881a9, type: 2}
-  ostrichPrefab: {fileID: 172566, guid: b6361f05f23fe79448d325538fac0e18, type: 2}
 --- !u!212 &1734646584
 SpriteRenderer:
   m_ObjectHideFlags: 0
