@@ -370,6 +370,14 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 11449302, guid: 860ab6caecc83bf4da585f2d754045aa, type: 2}
+      propertyPath: foxPrefab
+      value: 
+      objectReference: {fileID: 158712, guid: d5b2130900e88c146a92d5e7f0042cb9, type: 2}
+    - target: {fileID: 11449302, guid: 860ab6caecc83bf4da585f2d754045aa, type: 2}
+      propertyPath: birdPrefab
+      value: 
+      objectReference: {fileID: 168404, guid: a2f1671f4640f8546b35c4add5cab0bc, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 860ab6caecc83bf4da585f2d754045aa, type: 2}
   m_IsPrefabParent: 0

@@ -15,6 +15,9 @@ public class BoidsController {
     public void AddCharacter(Character i_character) {
         characters.Add(i_character);
     }
+    public void AddCharacters(List<Character> i_characters) {
+        characters.AddRange(i_characters);
+    }
 
     //
     public List<Character> FindCharactersInNeighborhood( Character i_character) {

@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LevelController : MonoBehaviour {
     public GameObject playerObject;
     public GameObject cameraObject;
+    public GameObject foxPrefab;
+    public GameObject birdPrefab;
     Player player;
     private CameraController cameraController;
     private GameController gameController;
@@ -11,7 +14,8 @@ public class LevelController : MonoBehaviour {
     private int currentLevel;
     // Magic Numbers.
     private float[] milestones = {0f, -25f, -90f, -200f};
-    
+    private NpcSpawner npcSpawner;
+    private BoidsController boidsController;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +24,23 @@ public class LevelController : MonoBehaviour {
 		gameController = cameraObject.GetComponent<GameController> ();
         fullScore = 1;
         currentLevel = 1;
+        npcSpawner = new NpcSpawner();
+        boidsController = new BoidsController();
+
+        boidsController.AddCharacter(player);
+
+        List<GameObject> npcPrefabs = new List<GameObject>();
+        npcPrefabs.Add(foxPrefab);
+        npcPrefabs.Add(birdPrefab);
+        npcSpawner.SetNpcPrefabs(npcPrefabs);
+        // Spawn for the first level.
+        boidsController.AddCharacters(npcSpawner.SpawnNpc(15, new Vector2(0f, 0f), new Vector2(40f, 40f)));
+        /*List<Character> npcs = npcSpawner.SpawnNpc(15, new Vector2(0f, 0f), new Vector2(40f, 40f));
+        foreach (Character npc in npcs) {
+            boidsController.AddCharacter(npc);
+        }
+        */
+        boidsController.Start();
 	}
 	
 	// Update is called once per frame
@@ -35,8 +56,11 @@ public class LevelController : MonoBehaviour {
                 river.GetComponent<Collider2D>().enabled = false;
             }
             cameraController.SetIsCrossing(true);
+            // Spawn for the next level
+            
         }
         if (player.GetComponent<Transform>().position.y < milestones[currentLevel] && cameraController.GetIsCrossing() == true) {
+            // Go to next level.
             gameController.SetScore(0);
             GameObject[] rivers = GameObject.FindGameObjectsWithTag("Bridge" + currentLevel);
             foreach (GameObject river in rivers) {
@@ -51,5 +75,6 @@ public class LevelController : MonoBehaviour {
             cameraController.StartZoom();
             currentLevel ++;
         }
+        boidsController.FixedUpdate();
     }
 }
