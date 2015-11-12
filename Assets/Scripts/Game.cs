@@ -48,4 +48,9 @@ public class Game : MonoBehaviour {
         //Debug.Log(boidsController.characters.Count);
         boidsController.FixedUpdate();	
 	}
+
+    public void LoadCustomizeScreen()
+    {
+        Application.LoadLevel("CharCustomize");
+    }
 }

@@ -1,28 +1,28 @@
 fileFormatVersion: 2
-guid: 543337c22df13ba488e39c0edf6c7991
-timeCreated: 1446760735
+guid: b0382b861377f9a4d82d12940785a26e
+timeCreated: 1447320129
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: rollingball_sheet_0
-    21300002: rollingball_sheet_1
-    21300004: rollingball_sheet_2
-    21300006: rollingball_sheet_3
-    21300008: rollingball_sheet_4
-    21300010: rollingball_sheet_5
-    21300012: rollingball_sheet_6
-    21300014: rollingball_sheet_7
-    21300016: rollingball_sheet_8
-    21300018: rollingball_sheet_9
-    21300020: rollingball_sheet_10
-    21300022: rollingball_sheet_11
-    21300024: rollingball_sheet_12
-    21300026: rollingball_sheet_13
-    21300028: rollingball_sheet_14
-    21300030: rollingball_sheet_15
-    21300032: rollingball_sheet_16
-    21300034: rollingball_sheet_17
-    21300036: rollingball_sheet_18
+    21300000: rollingball_sheet 1_0
+    21300002: rollingball_sheet 1_1
+    21300004: rollingball_sheet 1_2
+    21300006: rollingball_sheet 1_3
+    21300008: rollingball_sheet 1_4
+    21300010: rollingball_sheet 1_5
+    21300012: rollingball_sheet 1_6
+    21300014: rollingball_sheet 1_7
+    21300016: rollingball_sheet 1_8
+    21300018: rollingball_sheet 1_9
+    21300020: rollingball_sheet 1_10
+    21300022: rollingball_sheet 1_11
+    21300024: rollingball_sheet 1_12
+    21300026: rollingball_sheet 1_13
+    21300028: rollingball_sheet 1_14
+    21300030: rollingball_sheet 1_15
+    21300032: rollingball_sheet 1_16
+    21300034: rollingball_sheet 1_17
+    21300036: rollingball_sheet 1_18
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -69,7 +69,157 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: rollingball_sheet_0
+    - name: rollingball_sheet 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 750
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_1
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 750
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_2
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 750
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_3
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 750
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_4
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 750
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 500
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_6
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 500
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_7
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 500
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_8
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 500
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_9
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 500
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_11
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_12
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_13
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_14
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: rollingball_sheet 1_15
       rect:
         serializedVersion: 2
         x: 0
@@ -79,7 +229,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_1
+    - name: rollingball_sheet 1_16
       rect:
         serializedVersion: 2
         x: 250
@@ -89,7 +239,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_2
+    - name: rollingball_sheet 1_17
       rect:
         serializedVersion: 2
         x: 500
@@ -99,160 +249,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_3
+    - name: rollingball_sheet 1_18
       rect:
         serializedVersion: 2
         x: 750
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_4
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_5
-      rect:
-        serializedVersion: 2
-        x: 1250
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_6
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_7
-      rect:
-        serializedVersion: 2
-        x: 1750
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_8
-      rect:
-        serializedVersion: 2
-        x: 2000
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_9
-      rect:
-        serializedVersion: 2
-        x: 2250
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_10
-      rect:
-        serializedVersion: 2
-        x: 2500
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_11
-      rect:
-        serializedVersion: 2
-        x: 2750
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_12
-      rect:
-        serializedVersion: 2
-        x: 3000
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_13
-      rect:
-        serializedVersion: 2
-        x: 3250
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_14
-      rect:
-        serializedVersion: 2
-        x: 3500
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_15
-      rect:
-        serializedVersion: 2
-        x: 3750
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_16
-      rect:
-        serializedVersion: 2
-        x: 4000
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_17
-      rect:
-        serializedVersion: 2
-        x: 4250
-        y: 0
-        width: 250
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: rollingball_sheet_18
-      rect:
-        serializedVersion: 2
-        x: 4500
         y: 0
         width: 250
         height: 250

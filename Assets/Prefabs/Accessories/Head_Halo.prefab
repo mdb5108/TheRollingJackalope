@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .370000005, z: 0}
-  m_LocalScale: {x: .173139453, y: .173139453, z: .173139453}
+  m_LocalPosition: {x: 0, y: .263999999, z: 0}
+  m_LocalScale: {x: .11338345, y: .11338345, z: .11338345}
   m_Children: []
   m_Father: {fileID: 486386}
   m_RootOrder: 0
@@ -50,7 +50,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 179502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .850000024, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 442336}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1073622929
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 27cf14d0bf3632a43ad32346d101f3d6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6a36ed3797ecb1a408f5ad8c59e9e433, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -88,7 +88,12 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6a36ed3797ecb1a408f5ad8c59e9e433,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 179502}

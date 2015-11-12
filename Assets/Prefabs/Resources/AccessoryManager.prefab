@@ -41,21 +41,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeadAccessories:
   - name: None
-    obj: {fileID: 145906, guid: 1837f36d54cd3ed49a1dea818d5179c9, type: 2}
+    obj:
+      obj: {fileID: 145906, guid: 1837f36d54cd3ed49a1dea818d5179c9, type: 2}
+      price: 0
   - name: Cowboy Hat
-    obj: {fileID: 145906, guid: 05e975b07ff7c0f4daa1b63a4d5c4cd8, type: 2}
+    obj:
+      obj: {fileID: 145906, guid: 05e975b07ff7c0f4daa1b63a4d5c4cd8, type: 2}
+      price: 200
   - name: Halo
-    obj: {fileID: 179502, guid: b274de43ad484ae4ca8b9f6f02e0b48c, type: 2}
+    obj:
+      obj: {fileID: 179502, guid: b274de43ad484ae4ca8b9f6f02e0b48c, type: 2}
+      price: 200
   BodyAccessories:
   - name: None
-    obj: {fileID: 172418, guid: f3d4fee362321604d97230fc3a2105f3, type: 2}
+    obj:
+      obj: {fileID: 172418, guid: f3d4fee362321604d97230fc3a2105f3, type: 2}
+      price: 0
   - name: Clock Necklace
-    obj: {fileID: 172418, guid: 223bfb069a46cef4fb78734a7ba605ea, type: 2}
+    obj:
+      obj: {fileID: 172418, guid: 223bfb069a46cef4fb78734a7ba605ea, type: 2}
+      price: 200
   - name: Wings
-    obj: {fileID: 153986, guid: 03481fdfcf251014e80d3257b539aa70, type: 2}
+    obj:
+      obj: {fileID: 153986, guid: 03481fdfcf251014e80d3257b539aa70, type: 2}
+      price: 200
   FootAccessories:
   - name: None
-    obj: {fileID: 145906, guid: 25d02eafc2aeab04c9c56786090176ff, type: 2}
+    obj:
+      obj: {fileID: 145906, guid: 25d02eafc2aeab04c9c56786090176ff, type: 2}
+      price: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -123,6 +137,50 @@ Prefab:
       propertyPath: FootAccessories.Array.data[0].obj
       value: 
       objectReference: {fileID: 145906, guid: 25d02eafc2aeab04c9c56786090176ff, type: 2}
+    - target: {fileID: 0}
+      propertyPath: HeadAccessories.Array.data[1].obj.obj
+      value: 
+      objectReference: {fileID: 145906, guid: 05e975b07ff7c0f4daa1b63a4d5c4cd8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: HeadAccessories.Array.data[2].obj.obj
+      value: 
+      objectReference: {fileID: 179502, guid: b274de43ad484ae4ca8b9f6f02e0b48c, type: 2}
+    - target: {fileID: 0}
+      propertyPath: FootAccessories.Array.data[0].obj.obj
+      value: 
+      objectReference: {fileID: 145906, guid: 25d02eafc2aeab04c9c56786090176ff, type: 2}
+    - target: {fileID: 0}
+      propertyPath: BodyAccessories.Array.data[2].obj.obj
+      value: 
+      objectReference: {fileID: 153986, guid: 03481fdfcf251014e80d3257b539aa70, type: 2}
+    - target: {fileID: 0}
+      propertyPath: BodyAccessories.Array.data[1].obj.obj
+      value: 
+      objectReference: {fileID: 172418, guid: 223bfb069a46cef4fb78734a7ba605ea, type: 2}
+    - target: {fileID: 0}
+      propertyPath: HeadAccessories.Array.data[0].obj.obj
+      value: 
+      objectReference: {fileID: 145906, guid: 1837f36d54cd3ed49a1dea818d5179c9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: BodyAccessories.Array.data[0].obj.obj
+      value: 
+      objectReference: {fileID: 172418, guid: f3d4fee362321604d97230fc3a2105f3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: HeadAccessories.Array.data[1].obj.price
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: HeadAccessories.Array.data[2].obj.price
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BodyAccessories.Array.data[1].obj.price
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BodyAccessories.Array.data[2].obj.price
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 107606}

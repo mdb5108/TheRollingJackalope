@@ -39,6 +39,10 @@ public class Player : Character {
 	{
         //base.Start();
 		myRigidbody = GetComponent<Rigidbody2D> ();
+        var data = SavedGameManager.Instance.GetData();
+        SetHeadAccessory(data.headAccessory);
+        SetBodyAccessory(data.bodyAccessory);
+        SetFootAccessory(data.footAccessory);
 	}
 
 	void FixedUpdate ()
@@ -61,6 +65,7 @@ public class Player : Character {
 		if(other.gameObject.tag == "Friend")
 		{
 			gameController.AddScore(1);
+            SavedGameManager.Instance.GetData().currency += 20;
 			Destroy(other.gameObject);
             // Make the bubble bigger.
             GameObject bubble = GameObject.Find("Bubble");
@@ -74,24 +79,39 @@ public class Player : Character {
     {
         if(HeadAccessory != null)
             Destroy(HeadAccessory);
-        HeadAccessory = AccessoryManager.Instance.GetHeadAccessory(name);
+        HeadAccessory = AccessoryManager.Instance.GetHeadAccessory(name).obj;
         HeadAccessory = (GameObject)Instantiate(HeadAccessory, HeadAccessory.transform.position, HeadAccessory.transform.rotation);
-        HeadAccessory.transform.SetParent(HeadAnchor.transform);
+        HeadAccessory.transform.SetParent(HeadAnchor.transform, false);
+
+        if(HeadAccessory == null)
+            SavedGameManager.Instance.GetData().headAccessory = "None";
+        else
+            SavedGameManager.Instance.GetData().headAccessory = name;
     }
     public void SetBodyAccessory(string name)
     {
         if(BodyAccessory != null)
             Destroy(BodyAccessory);
-        BodyAccessory = AccessoryManager.Instance.GetBodyAccessory(name);
+        BodyAccessory = AccessoryManager.Instance.GetBodyAccessory(name).obj;
         BodyAccessory = (GameObject)Instantiate(BodyAccessory, BodyAccessory.transform.position, BodyAccessory.transform.rotation);
-        BodyAccessory.transform.SetParent(BodyAnchor.transform);
+        BodyAccessory.transform.SetParent(BodyAnchor.transform, false);
+
+        if(BodyAccessory == null)
+            SavedGameManager.Instance.GetData().bodyAccessory = "None";
+        else
+            SavedGameManager.Instance.GetData().bodyAccessory = name;
     }
     public void SetFootAccessory(string name)
     {
         if(FootAccessory != null)
             Destroy(FootAccessory);
-        FootAccessory = AccessoryManager.Instance.GetFootAccessory(name);
+        FootAccessory = AccessoryManager.Instance.GetFootAccessory(name).obj;
         FootAccessory = (GameObject)Instantiate(FootAccessory, FootAccessory.transform.position, FootAccessory.transform.rotation);
-        FootAccessory.transform.SetParent(FootAnchor.transform);
+        FootAccessory.transform.SetParent(FootAnchor.transform, false);
+
+        if(FootAccessory == null)
+            SavedGameManager.Instance.GetData().footAccessory = "None";
+        else
+            SavedGameManager.Instance.GetData().footAccessory = name;
     }
 }
