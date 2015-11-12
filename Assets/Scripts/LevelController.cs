@@ -27,10 +27,12 @@ public class LevelController : MonoBehaviour {
         player = playerObject.GetComponent<Player>();	
         cameraController = cameraObject.GetComponent<CameraController>();
 		gameController = cameraObject.GetComponent<GameController> ();
-        fullScore = 1;
+        fullScore = 15;
         maxLevel = 3;
         currentLevel = 1;
         hasSpawned = false;
+
+        gameController.SetThreshold(fullScore);
 
 		// Get the milestones.
 		for (int i = 1; i <= 3; ++ i) {

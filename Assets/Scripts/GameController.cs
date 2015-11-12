@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
 	{
 		score = 0;
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        UpdateScore();
 	}
 
 	void Update()
