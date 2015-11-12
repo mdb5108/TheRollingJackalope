@@ -29,8 +29,10 @@ public class CustomizeCharacterManager : MonoBehaviour
         interactible = interact;
     }
 
+
     void Update()
     {
+
         if(interactible)
         {
             if(Input.GetMouseButtonDown(0))

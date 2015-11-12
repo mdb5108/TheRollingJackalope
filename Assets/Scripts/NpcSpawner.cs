@@ -17,7 +17,7 @@ public class NpcSpawner {
         for (int i = 0; i < numOfNpc; ++i) {
             int index = Random.Range(0, npcPrefabs.Count);
             Character npc = ((GameObject)Object.Instantiate(npcPrefabs[index], Vector2.zero, Quaternion.identity)).GetComponent<Character>();
-            Vector2 position = new Vector2(Random.Range(0, size.x) - size.x/2, Random.Range(0, size.y) - size.y/2);
+            Vector2 position = new Vector2(Random.Range(0f, size.x) - size.x/2, Random.Range(0f, size.y) - size.y/2);
             position += center;
             npc.GetComponent<Transform>().position = position;
             npcs.Add(npc);

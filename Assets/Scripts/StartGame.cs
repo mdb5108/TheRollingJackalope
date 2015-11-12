@@ -3,8 +3,25 @@ using System.Collections;
 
 public class StartGame : MonoBehaviour {
 
+	private AudioSource audioSource;
+	private bool clicked = false;
+
+	void Start()
+	{
+		audioSource = GetComponent<AudioSource> ();
+	}
+
 	void OnMouseDown()
 	{
-		Application.LoadLevel ("Playground1");
+		clicked = true;
+		audioSource.Play();
+	}
+
+	void Update()
+	{
+		if(!audioSource.isPlaying && clicked)
+		{
+			Application.LoadLevel ("Playground1");
+		}
 	}
 }
