@@ -29,7 +29,7 @@ public class LevelController : MonoBehaviour {
 
     void FixedUpdate() {
         if (gameController.GetScore() >= fullScore && cameraController.GetIsCrossing() == false) {
-            GameObject[] rivers = GameObject.FindGameObjectsWithTag("River" + currentLevel);
+            GameObject[] rivers = GameObject.FindGameObjectsWithTag("Bridge" + currentLevel);
             foreach (GameObject river in rivers) {
                 river.GetComponent<BoxCollider2D>().enabled = false;
                 river.GetComponent<Collider2D>().enabled = false;
@@ -38,7 +38,7 @@ public class LevelController : MonoBehaviour {
         }
         if (player.GetComponent<Transform>().position.y < milestones[currentLevel] && cameraController.GetIsCrossing() == true) {
             gameController.SetScore(0);
-            GameObject[] rivers = GameObject.FindGameObjectsWithTag("River" + currentLevel);
+            GameObject[] rivers = GameObject.FindGameObjectsWithTag("Bridge" + currentLevel);
             foreach (GameObject river in rivers) {
                 river.GetComponent<BoxCollider2D>().enabled = true;
                 river.GetComponent<Collider2D>().enabled = true;
