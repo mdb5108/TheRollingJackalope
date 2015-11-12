@@ -1829,9 +1829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d540db963fe1e442858a432846aab15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 140674, guid: 9de51c242d7d4984e8b359ad78fd3da8, type: 2}
-  bearPrefab: {fileID: 158712, guid: d5b2130900e88c146a92d5e7f0042cb9, type: 2}
-  koalaPrefab: {fileID: 168404, guid: a2f1671f4640f8546b35c4add5cab0bc, type: 2}
 --- !u!212 &1734646584
 SpriteRenderer:
   m_ObjectHideFlags: 0
