@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour {
     public Transform target;
 
     private Camera ourCamera;
+	private AudioSource audioSource;
     
     private Vector2 offset;
     private bool isCrossing;
@@ -19,6 +20,8 @@ public class CameraController : MonoBehaviour {
     void Start()
     {
         ourCamera = GetComponent<Camera>();
+		audioSource = GetComponent<AudioSource> ();
+		audioSource.Play ();
         offset = Vector2.zero;
         isCrossing = false;
         isZooming = false;
