@@ -27,7 +27,7 @@ public class SavedGameData
         bodyUnlocked.Add("None", true);
         footUnlocked.Add("None", true);
 
-        currency = 0;
+        currency = 1000;
     }
 }
 
