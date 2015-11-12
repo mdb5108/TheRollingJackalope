@@ -9,10 +9,11 @@ public class BuyPanel : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private Image itemImage;
     [SerializeField] private Button actionButton;
+    [SerializeField] private Text priceText;
 
     Action confirmed;
 
-    public void PopUp(Sprite item, bool actionEnabled, Action confirm)
+    public void PopUp(Sprite item, uint price, bool actionEnabled, Action confirm)
     {
         itemImage.sprite = item;
 
@@ -20,6 +21,8 @@ public class BuyPanel : MonoBehaviour
 
         panel.SetActive(true);
         actionButton.interactable = actionEnabled;
+
+        priceText.text = price.ToString();
     }
 
     public void PopDown()

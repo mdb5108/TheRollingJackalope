@@ -81,7 +81,7 @@ public class Player : Character {
             Destroy(HeadAccessory);
         HeadAccessory = AccessoryManager.Instance.GetHeadAccessory(name).obj;
         HeadAccessory = (GameObject)Instantiate(HeadAccessory, HeadAccessory.transform.position, HeadAccessory.transform.rotation);
-        HeadAccessory.transform.SetParent(HeadAnchor.transform);
+        HeadAccessory.transform.SetParent(HeadAnchor.transform, false);
 
         if(HeadAccessory == null)
             SavedGameManager.Instance.GetData().headAccessory = "None";
@@ -94,7 +94,7 @@ public class Player : Character {
             Destroy(BodyAccessory);
         BodyAccessory = AccessoryManager.Instance.GetBodyAccessory(name).obj;
         BodyAccessory = (GameObject)Instantiate(BodyAccessory, BodyAccessory.transform.position, BodyAccessory.transform.rotation);
-        BodyAccessory.transform.SetParent(BodyAnchor.transform);
+        BodyAccessory.transform.SetParent(BodyAnchor.transform, false);
 
         if(BodyAccessory == null)
             SavedGameManager.Instance.GetData().bodyAccessory = "None";
@@ -107,7 +107,7 @@ public class Player : Character {
             Destroy(FootAccessory);
         FootAccessory = AccessoryManager.Instance.GetFootAccessory(name).obj;
         FootAccessory = (GameObject)Instantiate(FootAccessory, FootAccessory.transform.position, FootAccessory.transform.rotation);
-        FootAccessory.transform.SetParent(FootAnchor.transform);
+        FootAccessory.transform.SetParent(FootAnchor.transform, false);
 
         if(FootAccessory == null)
             SavedGameManager.Instance.GetData().footAccessory = "None";

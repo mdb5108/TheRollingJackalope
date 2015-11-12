@@ -184,6 +184,7 @@ public class AccessoryScroller : MonoBehaviour
             var price = this.items[selected].Value.price;
             CustomizeCharacterManager.Instance.TurnInteractible(false);
             buyPanel.PopUp(this.items[selected].Value.obj.GetComponentsInChildren<SpriteRenderer>(true)[0].sprite,
+                           price,
                            price <= currency,
                            BuySelected);
         }
