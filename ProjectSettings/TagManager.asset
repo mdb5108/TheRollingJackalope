@@ -11,6 +11,10 @@ TagManager:
   - Bridge1
   - Bridge2
   - Bridge3
+  - Bubble
+  - Menu
+  - Ostrich
+  - Fox
   layers:
   - Default
   - TransparentFX

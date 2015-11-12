@@ -39,8 +39,6 @@ public class Player : Character {
 	{
         //base.Start();
 		myRigidbody = GetComponent<Rigidbody2D> ();
-		gameController = Camera.main.GetComponent<GameController> ();
-
         var data = SavedGameManager.Instance.GetData();
         SetHeadAccessory(data.headAccessory);
         SetBodyAccessory(data.bodyAccessory);
@@ -61,6 +59,7 @@ public class Player : Character {
             myRigidbody.velocity = myRigidbody.velocity.normalized*MAX_SPEED;
 	}
 
+	/*
 	void OnCollisionEnter2D(Collision2D other)
 	{
 		if(other.gameObject.tag == "Friend")
@@ -74,6 +73,7 @@ public class Player : Character {
             bubble.GetComponent<Transform>().localScale = new Vector3(scale.x + 0.1f, scale.y + 0.1f, 1f);
 		}
 	}
+	*/
 
     public void SetHeadAccessory(string name)
     {
