@@ -79,6 +79,7 @@ public class BoidsController {
             sumForce += GetSeparationForce( character) / 10f;
             sumForce += GetCohensionForce( character) / 100f;
             character.velocity += sumForce/5f;
+
             character.GetComponent<Rigidbody2D>().MovePosition((Vector2)character.GetComponent<Transform>().position + character.velocity);
         }
 	}

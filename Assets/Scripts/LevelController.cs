@@ -11,12 +11,15 @@ public class LevelController : MonoBehaviour {
     private CameraController cameraController;
     private GameController gameController;
     private int fullScore;
+    private int maxLevel;
     private int currentLevel;
     // No Magic Numbers.
 	private float[] milestones = new float[4];
     // Magic Numbers.
     //private float[] milestones = {0f, -25f, -90f, -200f};
     private NpcSpawner npcSpawner;
+    private bool hasSpawned;
+    private int[] numOfNpc = {0, 15, 15, 15};
     private BoidsController boidsController;
 
 	// Use this for initialization
@@ -25,7 +28,9 @@ public class LevelController : MonoBehaviour {
         cameraController = cameraObject.GetComponent<CameraController>();
 		gameController = cameraObject.GetComponent<GameController> ();
         fullScore = 1;
+        maxLevel = 3;
         currentLevel = 1;
+        hasSpawned = false;
 
 		// Get the milestones.
 		for (int i = 1; i <= 3; ++ i) {
@@ -49,7 +54,7 @@ public class LevelController : MonoBehaviour {
         npcPrefabs.Add(birdPrefab);
         npcSpawner.SetNpcPrefabs(npcPrefabs);
         // Spawn for the first level.
-        boidsController.AddCharacters(npcSpawner.SpawnNpc(15, new Vector2(0f, 0f), new Vector2(40f, 40f)));
+        boidsController.AddCharacters(npcSpawner.SpawnNpc(15, new Vector2(0f, -6f), new Vector2(40f, 30f)));
         /*List<Character> npcs = npcSpawner.SpawnNpc(15, new Vector2(0f, 0f), new Vector2(40f, 40f));
         foreach (Character npc in npcs) {
             boidsController.AddCharacter(npc);
@@ -64,6 +69,7 @@ public class LevelController : MonoBehaviour {
 	}
 
     void FixedUpdate() {
+        // Open the bridge.
         if (gameController.GetScore() >= fullScore && cameraController.GetIsCrossing() == false) {
             GameObject[] rivers = GameObject.FindGameObjectsWithTag("Bridge" + currentLevel);
             foreach (GameObject river in rivers) {
@@ -71,13 +77,28 @@ public class LevelController : MonoBehaviour {
                 river.GetComponent<Collider2D>().enabled = false;
             }
             cameraController.SetIsCrossing(true);
-            // Spawn for the next level
-            
         }
 
+        // Spawn for next level
+        if (cameraController.GetIsCrossing() && player.GetComponent<Transform>().position.y > milestones[currentLevel] + 5f && currentLevel < maxLevel && hasSpawned == false) {
+            GameObject nextPlayground = GameObject.Find("Playground"+(currentLevel+1));
+            Transform borders = nextPlayground.GetComponent<Transform>().FindChild("Borders");
+            
+            Bounds totalBounds = borders.GetComponentInChildren<Collider2D>().bounds;
+            foreach(var col in borders.GetComponentsInChildren<Collider2D>())
+            {
+                totalBounds.Encapsulate(col.bounds);
+            }
 
+            Vector2 size = totalBounds.max - totalBounds.min;
+            size -= new Vector2(10f, 10f);
+            Vector2 center = (Vector2)totalBounds.min + new Vector2(5f, 5f) + size / 2;
+            boidsController.AddCharacters(npcSpawner.SpawnNpc(numOfNpc[currentLevel + 1], center, size));
+            hasSpawned = true;
+        }
+
+        // Go to next level.
         if (player.GetComponent<Transform>().position.y < milestones[currentLevel] && cameraController.GetIsCrossing() == true) {
-            // Go to next level.
             gameController.SetScore(0);
             GameObject[] rivers = GameObject.FindGameObjectsWithTag("Bridge" + currentLevel);
             foreach (GameObject river in rivers) {
@@ -91,6 +112,7 @@ public class LevelController : MonoBehaviour {
             //cameraController.SetOffset((Vector2)playgound.GetComponent<Transform>().position);
             cameraController.StartZoom();
             currentLevel ++;
+            hasSpawned = false;
         }
         boidsController.FixedUpdate();
     }
