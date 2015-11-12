@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-	public GUIText scoreText;
+	public Text scoreText;
 	public GameObject endGame;
 	public GameObject player;
 
