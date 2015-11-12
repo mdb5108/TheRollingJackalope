@@ -11,6 +11,10 @@ TagManager:
   - Bridge1
   - Bridge2
   - Bridge3
+  - Bubble
+  - Menu
+  - Ostrich
+  - Fox
   layers:
   - Default
   - TransparentFX
@@ -54,6 +58,12 @@ TagManager:
   - name: Objects
     uniqueID: 2985205997
     locked: 0
+  - name: PlayerBack
+    uniqueID: 2645687477
+    locked: 0
   - name: Player
     uniqueID: 548317735
+    locked: 0
+  - name: PlayerFront
+    uniqueID: 3221344367
     locked: 0

@@ -12,6 +12,8 @@ public class LevelController : MonoBehaviour {
     private GameController gameController;
     private int fullScore;
     private int currentLevel;
+    // No Magic Numbers.
+	private float[] milestones = new float[4];
     // Magic Numbers.
     private float[] milestones = {0f, -25f, -90f, -200f};
     private NpcSpawner npcSpawner;
@@ -24,6 +26,19 @@ public class LevelController : MonoBehaviour {
 		gameController = cameraObject.GetComponent<GameController> ();
         fullScore = 1;
         currentLevel = 1;
+
+		// Get the milestones.
+		for (int i = 1; i <= 3; ++ i) {
+			GameObject[] bridges = GameObject.FindGameObjectsWithTag("Bridge" + i);
+			float minY = float.MaxValue;
+			foreach (GameObject bridge in bridges) {
+				if (bridge.GetComponent<Transform>().position.y < minY) {
+					minY = bridge.GetComponent<Transform>().position.y;
+					//Debug.Log (i + " " + bridge.name + " " + minY);
+				}
+			}
+			milestones[i] = minY - 5;
+		}
         npcSpawner = new NpcSpawner();
         boidsController = new BoidsController();
 
@@ -59,6 +74,8 @@ public class LevelController : MonoBehaviour {
             // Spawn for the next level
             
         }
+
+
         if (player.GetComponent<Transform>().position.y < milestones[currentLevel] && cameraController.GetIsCrossing() == true) {
             // Go to next level.
             gameController.SetScore(0);
