@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour {
 			Application.Quit();
 		}
 
-		if(currentLevel == 3 && score == 1 && !won)
+		if(currentLevel == 3 && score == 15 && !won)
 		{
 			won = true;
 			Instantiate(endGame,(Vector2)Camera.current.transform.position,Quaternion.identity);
