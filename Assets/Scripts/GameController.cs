@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour {
 
 	public GUIText scoreText;
 	private int score;
+	private int scoreThreshold;
 	
 	void Start ()
 	{
@@ -22,7 +23,7 @@ public class GameController : MonoBehaviour {
 
 	void UpdateScore ()
 	{
-		scoreText.text = "" + score;
+		scoreText.text = score + "/" + scoreThreshold;
 	}
 
 	public void AddScore(int newScore)
@@ -30,4 +31,17 @@ public class GameController : MonoBehaviour {
 		score += newScore;
 		UpdateScore();
 	}
+
+	public void SetThreshold(int newValue)
+	{
+		scoreThreshold = newValue;
+	}
+
+    public int GetScore() {
+        return score;
+    }
+    public void SetScore(int i_score) {
+        score = i_score;
+        UpdateScore();
+    }
 }

@@ -8,7 +8,7 @@ public class Player : Character {
 	public float gyroForce = 50;
 	public GUIText scoreText;
 	public int score = 0;
-	private GameController gameController;
+	private GameController gameController; 
 
     private static readonly float MAX_SPEED = 20;
 
@@ -68,6 +68,10 @@ public class Player : Character {
 			gameController.AddScore(1);
             SavedGameManager.Instance.GetData().currency += 20;
 			Destroy(other.gameObject);
+            // Make the bubble bigger.
+            GameObject bubble = GameObject.Find("Bubble");
+            Vector3 scale = bubble.GetComponent<Transform>().localScale;
+            bubble.GetComponent<Transform>().localScale = new Vector3(scale.x + 0.1f, scale.y + 0.1f, 1f);
 		}
 	}
 
