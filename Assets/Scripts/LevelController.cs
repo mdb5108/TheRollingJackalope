@@ -122,8 +122,7 @@ public class LevelController : MonoBehaviour {
 			totalBounds.Encapsulate(col.bounds);
 		}
 		
-		o_size = totalBounds.max - totalBounds.min;
-		o_size -= new Vector2(10f, 10f);
-		o_center = (Vector2)totalBounds.min + new Vector2(5f, 5f) + o_size / 2;
+        o_size = new Vector2(10f, 10f);
+        o_center = totalBounds.center;
 	}
 }
