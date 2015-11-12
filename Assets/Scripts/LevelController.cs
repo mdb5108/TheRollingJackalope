@@ -68,10 +68,10 @@ public class LevelController : MonoBehaviour {
                 river.GetComponent<Collider2D>().enabled = true;
             }
 
-            GameObject playgound1 = GameObject.Find("Playground"+(currentLevel + 1));
-            cameraObject.GetComponent<CameraController>().borders = playgound1.GetComponent<Transform>().FindChild("Borders");      
+            GameObject playgound = GameObject.Find("Playground"+(currentLevel + 1));
+            cameraObject.GetComponent<CameraController>().borders = playgound.GetComponent<Transform>().FindChild("Borders");
             cameraController.SetIsCrossing(false);
-            cameraController.SetOffset((Vector2)playgound1.GetComponent<Transform>().position);
+            cameraController.SetOffset((Vector2)playgound.GetComponent<Transform>().position);
             cameraController.StartZoom();
             currentLevel ++;
         }

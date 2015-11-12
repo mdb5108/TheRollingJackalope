@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Game : MonoBehaviour {
+    /*
     public GameObject characterPrefab;
     public GameObject bearPrefab;
     public GameObject koalaPrefab;
@@ -43,4 +44,5 @@ public class Game : MonoBehaviour {
         //Debug.Log(boidsController.characters.Count);
         boidsController.FixedUpdate();	
 	}
+    */
 }
