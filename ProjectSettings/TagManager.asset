@@ -7,6 +7,10 @@ TagManager:
   - StaticCollider
   - Border
   - Friend
+  - Bridge0
+  - Bridge1
+  - Bridge2
+  - Bridge3
   - Bubble
   - Menu
   - Ostrich
