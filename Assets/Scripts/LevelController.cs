@@ -63,6 +63,7 @@ public class LevelController : MonoBehaviour {
             cameraController.SetIsCrossing(false);
             cameraController.StartZoom();
             currentLevel ++;
+			gameController.ChangeLevel (currentLevel);
         }
     }
 }
