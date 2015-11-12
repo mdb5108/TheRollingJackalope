@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour {
         ourCamera = GetComponent<Camera>();
 		audioSource = GetComponent<AudioSource> ();
 		audioSource.Play ();
-        offset = Vector2.zero;
+        //offset = Vector2.zero;
         isCrossing = false;
         isZooming = false;
         wantedSize = ourCamera.orthographicSize;
@@ -43,20 +43,15 @@ public class CameraController : MonoBehaviour {
             {
                 totalBounds.Encapsulate(col.bounds);
             }
-            Vector2 mapExtents = (totalBounds.max - totalBounds.min) / 2;
-            //Debug.Log("totalBounds.max:" + totalBounds.max);
-
-            Vector2 limits = (mapExtents) - ourCameraSize;
-
+            
             Vector3 destPos = destination;
-            destPos.x = Mathf.Clamp(destination.x, -limits.x, limits.x);
-            if (isCrossing == true) {
-                destPos.y = Mathf.Clamp(destination.y, -500+offset.y, limits.y+offset.y);
-            } else {
-                //Debug.Log("limits: " + limits);
-                //Debug.Log("offset: " + offset);
-                destPos.y = Mathf.Clamp(destination.y, -limits.y+offset.y, limits.y+offset.y);
-            }
+			destPos.x = Mathf.Clamp(destination.x, totalBounds.min.x + ourCameraSize.x, totalBounds.max.x - ourCameraSize.x);
+			if (isCrossing == true) {
+				destPos.y = Mathf.Clamp(destination.y, totalBounds.min.y + ourCameraSize.y - 30, totalBounds.max.y - ourCameraSize.y);
+			} else {
+				destPos.y = Mathf.Clamp(destination.y, totalBounds.min.y + ourCameraSize.y, totalBounds.max.y - ourCameraSize.y);
+			}
+
             transform.position = Vector3.SmoothDamp(transform.position, destPos, ref velocity, dampTime);
 
             // zooming out
@@ -74,9 +69,6 @@ public class CameraController : MonoBehaviour {
     }
     public bool GetIsCrossing() {
         return isCrossing;
-    }
-    public void SetOffset(Vector2 i_offset) {
-        offset = i_offset;
     }
     public void StartZoom() {
 
