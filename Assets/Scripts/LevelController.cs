@@ -9,9 +9,8 @@ public class LevelController : MonoBehaviour {
     private GameController gameController;
     private int fullScore;
     private int currentLevel;
-    // Magic Numbers.
-    private float[] milestones = {0f, -25f, -90f, -200f};
-    
+    // No Magic Numbers.
+	private float[] milestones = new float[4];
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +19,19 @@ public class LevelController : MonoBehaviour {
 		gameController = cameraObject.GetComponent<GameController> ();
         fullScore = 1;
         currentLevel = 1;
+
+		// Get the milestones.
+		for (int i = 1; i <= 3; ++ i) {
+			GameObject[] bridges = GameObject.FindGameObjectsWithTag("Bridge" + i);
+			float minY = float.MaxValue;
+			foreach (GameObject bridge in bridges) {
+				if (bridge.GetComponent<Transform>().position.y < minY) {
+					minY = bridge.GetComponent<Transform>().position.y;
+					//Debug.Log (i + " " + bridge.name + " " + minY);
+				}
+			}
+			milestones[i] = minY - 5;
+		}
 	}
 	
 	// Update is called once per frame
@@ -36,6 +48,8 @@ public class LevelController : MonoBehaviour {
             }
             cameraController.SetIsCrossing(true);
         }
+
+
         if (player.GetComponent<Transform>().position.y < milestones[currentLevel] && cameraController.GetIsCrossing() == true) {
             gameController.SetScore(0);
             GameObject[] rivers = GameObject.FindGameObjectsWithTag("Bridge" + currentLevel);
@@ -44,10 +58,9 @@ public class LevelController : MonoBehaviour {
                 river.GetComponent<Collider2D>().enabled = true;
             }
 
-            GameObject playgound1 = GameObject.Find("Playground"+(currentLevel + 1));
-            cameraObject.GetComponent<CameraController>().borders = playgound1.GetComponent<Transform>().FindChild("Borders");      
+            GameObject playgound = GameObject.Find("Playground"+(currentLevel + 1));
+            cameraObject.GetComponent<CameraController>().borders = playgound.GetComponent<Transform>().FindChild("Borders");      
             cameraController.SetIsCrossing(false);
-            cameraController.SetOffset((Vector2)playgound1.GetComponent<Transform>().position);
             cameraController.StartZoom();
             currentLevel ++;
         }
