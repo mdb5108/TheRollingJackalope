@@ -13,6 +13,8 @@ public class Bubble : MonoBehaviour {
 	private float scaleIncrement = 0.1f;
 	private GameObject friendClone;
 
+    private static readonly uint CURRENCY_RATE = 20;
+
 	void Start()
 	{
 		gameController = Camera.main.GetComponent<GameController> ();
@@ -23,6 +25,7 @@ public class Bubble : MonoBehaviour {
 	{
 		if(other.gameObject.tag == "Fox" || other.gameObject.tag == "Ostrich")
 		{
+            SavedGameManager.Instance.GetData().currency += CURRENCY_RATE;
 			gameController.AddScore(1);
 			audioSource.clip = captureSound[Random.Range (0,captureSound.Length)];
 			audioSource.Play();

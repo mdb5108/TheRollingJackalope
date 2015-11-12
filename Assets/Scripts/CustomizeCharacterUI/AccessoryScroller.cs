@@ -1,113 +1,192 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class AccessoryScroller : MonoBehaviour
 {
+    enum BODY_SECTION { HEAD = 0, BODY = 1, FOOT = 2 };
+
     [SerializeField]
     private GameObject UIContainer;
 
-    private static readonly Vector2 ITEM_BASE =       new Vector2(0, -1);
-    private static readonly Vector2 ITEM_SEPERATION = new Vector2(1f, 0);
-
-    KeyValuePair<string, GameObject>[] headItems;
-    KeyValuePair<string, GameObject>[] bodyItems;
-    KeyValuePair<string, GameObject>[] footItems;
+    KeyValuePair<string, AccessoryManager.AccessoryItem>[] items;
+    LockableItem[] instantiated;
 
     [SerializeField]
-    private HorizontalScrollSnap HeadScroller;
+    private BuyPanel buyPanel;
+
     [SerializeField]
-    private GameObject headContentPane;
+    private HorizontalScrollSnap scroller;
     [SerializeField]
-    private HorizontalScrollSnap BodyScroller;
+    private GameObject contentPane;
+
     [SerializeField]
-    private GameObject bodyContentPane;
-    [SerializeField]
-    private HorizontalScrollSnap FootScroller;
-    [SerializeField]
-    private GameObject footContentPane;
+    private BODY_SECTION ourSection;
+
+    private int selected = 0;
 
     // Use this for initialization
     void Start ()
     {
-        HeadScroller.OnSelectionChanged = OnSelectionChanged;
-        BodyScroller.OnSelectionChanged = OnSelectionChanged;
-        FootScroller.OnSelectionChanged = OnSelectionChanged;
+        scroller.OnSelectionChanged = OnSelectionChanged;
+        KeyValuePair<string, AccessoryManager.AccessoryItem>[] accessories;
+        string accessoryName;
 
-        SetItems(CustomizeCharacterManager.BODY_SECTION.HEAD, AccessoryManager.Instance.GetHeadAccessories());
-        SetItems(CustomizeCharacterManager.BODY_SECTION.BODY, AccessoryManager.Instance.GetBodyAccessories());
-        SetItems(CustomizeCharacterManager.BODY_SECTION.FOOT, AccessoryManager.Instance.GetFootAccessories());
+        switch(ourSection)
+        {
+            case BODY_SECTION.HEAD:
+                accessories = AccessoryManager.Instance.GetHeadAccessories();
+                accessoryName = SavedGameManager.Instance.GetData().headAccessory;
+                break;
+            case BODY_SECTION.BODY:
+                accessories = AccessoryManager.Instance.GetBodyAccessories();
+                accessoryName = SavedGameManager.Instance.GetData().bodyAccessory;
+                break;
+            default:
+            case BODY_SECTION.FOOT:
+                accessories = AccessoryManager.Instance.GetFootAccessories();
+                accessoryName = SavedGameManager.Instance.GetData().footAccessory;
+                break;
+        }
+
+        SetItems(accessories);
+        scroller.Start();
+
+        int i;
+        for(i = 0; i < accessories.Length; i++)
+        {
+            if(accessories[i].Key == accessoryName)
+            {
+                SetInitialSelect(i);
+                break;
+            }
+        }
+        if(i == accessories.Length)
+        {
+            Debug.Log("Not Found: " + accessoryName);
+        }
+    }
+
+    public void SetInitialSelect(int item)
+    {
+        scroller.JumpToScreen(item);
     }
 
     public void OnSelectionChanged(int item)
     {
-        switch(CustomizeCharacterManager.Instance.GetCurrentSection())
+        switch(ourSection)
         {
-            case CustomizeCharacterManager.BODY_SECTION.HEAD:
-                Player.Instance.SetHeadAccessory(headItems[item].Key);
+            case BODY_SECTION.HEAD:
+                if(IsUnlocked(item))
+                    Player.Instance.SetHeadAccessory(items[item].Key);
                 break;
-            case CustomizeCharacterManager.BODY_SECTION.BODY:
-                Player.Instance.SetBodyAccessory(bodyItems[item].Key);
+            case BODY_SECTION.BODY:
+                if(IsUnlocked(item))
+                    Player.Instance.SetBodyAccessory(items[item].Key);
                 break;
             default:
-            case CustomizeCharacterManager.BODY_SECTION.FOOT:
-                Player.Instance.SetFootAccessory(footItems[item].Key);
+            case BODY_SECTION.FOOT:
+                if(IsUnlocked(item))
+                    Player.Instance.SetFootAccessory(items[item].Key);
                 break;
         }
+
+        SetItemState(selected);
+        SetItemState(item, true);
+        selected = item;
     }
 
-    public void SetBodyActive(CustomizeCharacterManager.BODY_SECTION section)
+    private void SetItems(KeyValuePair<string, AccessoryManager.AccessoryItem>[] items)
     {
-        switch(section)
+        this.items = items;
+        if(this.instantiated != null)
         {
-            case CustomizeCharacterManager.BODY_SECTION.HEAD:
-                HeadScroller.gameObject.SetActive(true);
-                BodyScroller.gameObject.SetActive(false);
-                FootScroller.gameObject.SetActive(false);
-                break;
-            case CustomizeCharacterManager.BODY_SECTION.BODY:
-                HeadScroller.gameObject.SetActive(false);
-                BodyScroller.gameObject.SetActive(true);
-                FootScroller.gameObject.SetActive(false);
-                break;
-            case CustomizeCharacterManager.BODY_SECTION.FOOT:
-                HeadScroller.gameObject.SetActive(false);
-                BodyScroller.gameObject.SetActive(false);
-                FootScroller.gameObject.SetActive(true);
-                break;
-            default:
-                Debug.LogError("Body Section given was not found!");
-                break;
+            foreach(var li in this.instantiated)
+            {
+                li.gameObject.transform.SetParent(null);
+                Destroy(li.gameObject);
+            }
         }
-    }
-
-    private void SetItems(CustomizeCharacterManager.BODY_SECTION section, KeyValuePair<string, GameObject>[] items)
-    {
-        GameObject contentPane;
-        switch(section)
-        {
-            case CustomizeCharacterManager.BODY_SECTION.HEAD:
-                this.headItems = items;
-                contentPane = headContentPane;
-                break;
-            case CustomizeCharacterManager.BODY_SECTION.BODY:
-                this.bodyItems = items;
-                contentPane = bodyContentPane;
-                break;
-            default:
-            case CustomizeCharacterManager.BODY_SECTION.FOOT:
-                this.footItems = items;
-                contentPane = footContentPane;
-                break;
-        }
+        this.instantiated = new LockableItem[items.Length];
 
         for(int i = 0; i < items.Length; i++)
         {
             GameObject go = (GameObject)Instantiate(UIContainer, Vector2.zero, Quaternion.identity);
             go.transform.SetParent(contentPane.transform, true);
-            go.GetComponent<Image>().sprite = items[i].Value.GetComponentsInChildren<SpriteRenderer>(true)[0].sprite;
+            LockableItem li = go.GetComponent<LockableItem>();
+            li.SetImage(items[i].Value.obj.GetComponentsInChildren<SpriteRenderer>(true)[0].sprite);
+            this.instantiated[i] = li;
+            SetItemState(i);
+        }
+    }
+
+    private void SetItemState(int item, bool selected = false)
+    {
+        if(!selected)
+            instantiated[item].SetState(IsUnlocked(item) ? LockableItem.SHOW_STATE.UNLOCKED : LockableItem.SHOW_STATE.LOCKED);
+        else
+            instantiated[item].SetState(IsUnlocked(item) ? LockableItem.SHOW_STATE.UNLOCKED_ON : LockableItem.SHOW_STATE.LOCKED_ON);
+    }
+
+    public void BuySelected()
+    {
+        Dictionary<string, bool> unlocked;
+        switch(ourSection)
+        {
+            case BODY_SECTION.HEAD:
+                unlocked = SavedGameManager.Instance.GetData().headUnlocked;
+                Player.Instance.SetHeadAccessory(items[selected].Key);
+                break;
+            case BODY_SECTION.BODY:
+                unlocked = SavedGameManager.Instance.GetData().bodyUnlocked;
+                Player.Instance.SetBodyAccessory(items[selected].Key);
+                break;
+            default:
+            case BODY_SECTION.FOOT:
+                unlocked = SavedGameManager.Instance.GetData().footUnlocked;
+                Player.Instance.SetFootAccessory(items[selected].Key);
+                break;
+        }
+        unlocked[items[selected].Key] = true;
+        instantiated[selected].SetState(LockableItem.SHOW_STATE.UNLOCKED_ON);
+        SavedGameManager.Instance.GetData().currency -= this.items[selected].Value.price;
+    }
+
+    private bool IsUnlocked(int item)
+    {
+        Dictionary<string, bool> unlocked;
+        switch(ourSection)
+        {
+            case BODY_SECTION.HEAD:
+                unlocked = SavedGameManager.Instance.GetData().headUnlocked;
+                break;
+            case BODY_SECTION.BODY:
+                unlocked = SavedGameManager.Instance.GetData().bodyUnlocked;
+                break;
+            default:
+            case BODY_SECTION.FOOT:
+                unlocked = SavedGameManager.Instance.GetData().footUnlocked;
+                break;
+        }
+        bool ret = false;
+        unlocked.TryGetValue(this.items[item].Key, out ret);
+        return ret;
+    }
+
+    public void OpenSelected()
+    {
+        if(!IsUnlocked(selected))
+        {
+            var currency = SavedGameManager.Instance.GetData().currency;
+            var price = this.items[selected].Value.price;
+            CustomizeCharacterManager.Instance.TurnInteractible(false);
+            buyPanel.PopUp(this.items[selected].Value.obj.GetComponentsInChildren<SpriteRenderer>(true)[0].sprite,
+                           price,
+                           price <= currency,
+                           BuySelected);
         }
     }
 }

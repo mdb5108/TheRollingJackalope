@@ -3,6 +3,8 @@
 /// Updated by ddreaper - removed dependency on a custom ScrollRect script. Now implements drag interfaces and standard Scroll Rect.
 
 using System;
+using System.Collections;
+using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
 
 namespace UnityEngine.UI.Extensions
@@ -43,6 +45,8 @@ namespace UnityEngine.UI.Extensions
         private Vector3 _startPosition = new Vector3();
         private int _oldScreen;
         private int _currentScreen;
+
+        private Coroutine _jumpToPageRoutine;
 
         // Use this for initialization
         public void Start()
@@ -99,7 +103,12 @@ namespace UnityEngine.UI.Extensions
             if(_oldScreen != CurrentScreen())
             {
                 if(OnSelectionChanged != null)
-                    OnSelectionChanged(CurrentScreen());
+                {
+                    if(CurrentScreen() >= 0)
+                        OnSelectionChanged(CurrentScreen());
+                    else
+                        OnSelectionChanged(0);
+                }
                 _oldScreen = CurrentScreen();
             }
 
@@ -112,6 +121,31 @@ namespace UnityEngine.UI.Extensions
 
         private bool fastSwipe = false; //to determine if a fast swipe was performed
 
+        private IEnumerator jumpingScreenCoroutine(int screen)
+        {
+            Action moveScreen = (screen > CurrentScreen()) ? (Action)(NextScreen) : (Action)(PreviousScreen);
+            while(CurrentScreen() != screen)
+            {
+                moveScreen();
+                yield return null;
+            }
+        }
+
+        public void JumpToScreen(int screen)
+        {
+            Assert.IsTrue(0 <= screen && screen < _screens);
+
+            if(_jumpToPageRoutine != null)
+            {
+                StopCoroutine(_jumpToPageRoutine);
+                _jumpToPageRoutine = null;
+            }
+
+            if(CurrentScreen() != screen)
+                _jumpToPageRoutine = StartCoroutine(jumpingScreenCoroutine(screen));
+            else
+                OnSelectionChanged(screen);
+        }
 
         //Function for switching screens with buttons
         public void NextScreen()
@@ -208,8 +242,8 @@ namespace UnityEngine.UI.Extensions
         //used for changing between screen resolutions
         private void DistributePages()
         {
-            int _offset = -(int)((_screensContainer.transform.childCount-1)*gameObject.GetComponent<RectTransform>().rect.width/2);
-            int _step = (int)gameObject.GetComponent<RectTransform>().rect.width;
+            int _offset = -(int)((_screensContainer.transform.childCount-1)*gameObject.GetComponent<RectTransform>().rect.width);
+            int _step = 2*(int)gameObject.GetComponent<RectTransform>().rect.width;
             int _dimension = 0;
 
             int currentXPosition = 0;
@@ -234,6 +268,11 @@ namespace UnityEngine.UI.Extensions
             _fastSwipeCounter = 0;
             _fastSwipeTimer = true;
             _currentScreen = CurrentScreen();
+            if(_jumpToPageRoutine != null)
+            {
+                StopCoroutine(_jumpToPageRoutine);
+                _jumpToPageRoutine = null;
+            }
         }
 
         public void OnEndDrag(PointerEventData eventData)
