@@ -7,16 +7,21 @@ public class Game : MonoBehaviour {
     public GameObject koalaPrefab;
     private Vector2 ArenaPosition;
     private Vector2 ArenaSize;
-    private int numOfCharacter;
+    private int numOfCharacters;
     private BoidsController boidsController;
-	// Use this for initialization
-	void Start () {
+	private GameController gameController;
+
+	void Start ()
+	{
+		gameController = Camera.main.GetComponent<GameController> ();
         boidsController = new BoidsController();
 	    ArenaPosition = new Vector2(-20f, -20f);
         ArenaSize = new Vector2(40f, 40f);
 
-        numOfCharacter = 40;
-        for (int i = 0; i < numOfCharacter; ++i) {
+        numOfCharacters = 15;
+		gameController.SetThreshold (numOfCharacters);
+
+        for (int i = 0; i < numOfCharacters; ++i) {
             Character character = ((GameObject)Instantiate(bearPrefab, Vector2.zero, Quaternion.identity)).GetComponent<Character>();
             //Character character = ((GameObject)Instantiate(characterPrefab, Vector2.zero, Quaternion.identity)).GetComponent<Character>();
             
@@ -32,9 +37,9 @@ public class Game : MonoBehaviour {
 
         boidsController.Start();
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+	void FixedUpdate ()
+	{
         //Debug.Log(boidsController.characters.Count);
         boidsController.FixedUpdate();	
 	}
