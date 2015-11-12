@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Player : Character {
@@ -7,8 +7,6 @@ public class Player : Character {
 
 	public float gyroForce = 50;
 	public GUIText scoreText;
-	public int score = 0;
-	private GameController gameController;
 
     private static readonly float MAX_SPEED = 20;
 
@@ -39,7 +37,6 @@ public class Player : Character {
 	{
         //base.Start();
 		myRigidbody = GetComponent<Rigidbody2D> ();
-		gameController = Camera.main.GetComponent<GameController> ();
 	}
 
 	void FixedUpdate ()
@@ -56,14 +53,7 @@ public class Player : Character {
             myRigidbody.velocity = myRigidbody.velocity.normalized*MAX_SPEED;
 	}
 
-	void OnCollisionEnter2D(Collision2D other)
-	{
-		if(other.gameObject.tag == "Friend")
-		{
-			gameController.AddScore(1);
-			Destroy(other.gameObject);
-		}
-	}
+
 
     public void SetHeadAccessory(string name)
     {

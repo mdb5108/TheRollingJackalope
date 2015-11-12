@@ -9,10 +9,13 @@ public class CameraController : MonoBehaviour {
     public Transform target;
 
     private Camera ourCamera;
+	private AudioSource audioSource;
 
     void Start()
     {
         ourCamera = GetComponent<Camera>();
+		audioSource = GetComponent<AudioSource> ();
+		audioSource.Play ();
     }
 
     void FixedUpdate ()
