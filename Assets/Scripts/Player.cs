@@ -6,6 +6,7 @@ public class Player : Character {
 	private Rigidbody2D myRigidbody;
 
 	public float gyroForce = 50;
+    public float pcInputSpeed = 30;
 	public GUIText scoreText;
 	public int score = 0;
 	private GameController gameController; 
@@ -51,7 +52,7 @@ public class Player : Character {
         if(respondToInput)
         {
             myRigidbody.AddForce (new Vector2(Input.acceleration.x*gyroForce, Input.acceleration.y*gyroForce));
-            myRigidbody.AddForce (new Vector2(Input.GetAxis("Horizontal")*gyroForce,Input.GetAxis("Vertical")*gyroForce));
+            myRigidbody.AddForce (new Vector2(Input.GetAxis("Horizontal")*pcInputSpeed,Input.GetAxis("Vertical")*pcInputSpeed));
         }
 
         //Clamp player speed so bouncing doesn't get out of control
