@@ -16,11 +16,9 @@ public class BoidsController {
         characters.Add(i_character);
     }
 
-    //
     public List<Character> FindCharactersInNeighborhood( Character i_character) {
         Vector2 center = (Vector2) i_character.GetComponent<Transform>().position;
         List<Character> characterInNeighborhood = new List<Character>();
-//        Character[] characters = FindObjectsOfType(typeof(Character)) as Character[];
         foreach (Character character in characters) {
             float distance = Vector2.Distance(center, (Vector2) character.GetComponent<Transform>().position);
             if (distance < neighborRadius) {
