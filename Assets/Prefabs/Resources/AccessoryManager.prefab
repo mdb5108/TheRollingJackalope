@@ -70,6 +70,14 @@ MonoBehaviour:
     obj:
       obj: {fileID: 145906, guid: 25d02eafc2aeab04c9c56786090176ff, type: 2}
       price: 0
+  - name: Wrestling Belt
+    obj:
+      obj: {fileID: 145906, guid: cf35be6a7d16b3849affecebc06d0478, type: 2}
+      price: 200
+  - name: Karate Belt
+    obj:
+      obj: {fileID: 145906, guid: 4fa2ff4cbbab837468d5230978e53a84, type: 2}
+      price: 200
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -87,7 +95,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: FootAccessories.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: HeadAccessories.Array.data[1].name
@@ -181,6 +189,30 @@ Prefab:
       propertyPath: BodyAccessories.Array.data[2].obj.price
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FootAccessories.Array.data[1].name
+      value: Wrestling Belt
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FootAccessories.Array.data[2].name
+      value: Karate Belt
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FootAccessories.Array.data[1].obj.price
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FootAccessories.Array.data[2].obj.price
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: FootAccessories.Array.data[2].obj.obj
+      value: 
+      objectReference: {fileID: 145906, guid: 4fa2ff4cbbab837468d5230978e53a84, type: 2}
+    - target: {fileID: 0}
+      propertyPath: FootAccessories.Array.data[1].obj.obj
+      value: 
+      objectReference: {fileID: 145906, guid: cf35be6a7d16b3849affecebc06d0478, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 107606}
